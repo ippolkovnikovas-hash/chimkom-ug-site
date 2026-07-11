@@ -1,0 +1,45 @@
+company_site/
+│
+├── app/
+│   ├── __init__.py          # create_app(), регистрация blueprints
+│   ├── config.py            # Config классы (Dev/Prod)
+│   ├── extensions.py        # db, migrate, login_manager - инициализация
+│   │
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── product.py       # Product, Category
+│   │   └── user.py          # для будущей админки
+│   │
+│   ├── main/                # blueprint: главная, о компании, контакты
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   │
+│   ├── products/            # blueprint: каталог продукции
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   │
+│   ├── admin/                # blueprint: управление каталогом
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   └── forms.py
+│   │
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── main/
+│   │   ├── products/
+│   │   └── admin/
+│   │
+│   └── static/
+│       ├── css/
+│       ├── js/
+│       └── images/products/
+│
+├── migrations/               # Flask-Migrate
+├── tests/
+├── .env
+├── .flaskenv
+├── config.py
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── run.py
