@@ -5,11 +5,13 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
+    <meta name="description" content="ХИМКОМ-ЮГ — производство добавок для бетона. г. Краснодар.">
+    <meta name="author" content="ХИМКОМ-ЮГ">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>{% block title %}Finance Business{% endblock %}</title>
+    <title>{% block title %}ХИМКОМ-ЮГ — добавки для бетона{% endblock %}</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo-clear.png') }}">
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -40,16 +42,15 @@
         <div class="row">
           <div class="col-md-8 col-xs-12">
             <ul class="left-info">
-              <li><a href="#"><i class="fa fa-clock-o"></i>Mon-Fri 09:00-17:00</a></li>
-              <li><a href="#"><i class="fa fa-phone"></i>090-080-0760</a></li>
+                <li><a href="tel:+79624238118"><i class="fa fa-phone"></i>+7-962-423-81-18</a></li>
+                <li><a href="mailto:chimkom-ug@mail.ru"><i class="fa fa-envelope"></i>chimkom-ug@mail.ru</a></li>
             </ul>
           </div>
           <div class="col-md-4">
             <ul class="right-icons">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                <li><a href="https://wa.me/79624238118" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a></li>
+                <li><a href="#" target="_blank" title="Telegram"><i class="fa fa-paper-plane"></i></a></li>
+                <li><a href="#" title="Max"><i class="fa fa-comment"></i></a></li>
             </ul>
           </div>
         </div>
@@ -59,25 +60,27 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="{{ url_for('main.index') }}"><h2>Finance Business</h2></a>
+          <a class="navbar-brand" href="{{ url_for('main.index') }}">
+            <img src="{{ url_for('static', filename='images/logo-clear.png') }}" alt="ХИМКОМ-ЮГ" class="logo-img">
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item {% block nav_home %}{% endblock %}">
-                <a class="nav-link" href="{{ url_for('main.index') }}">Home
-                  <span class="sr-only">(current)</span>
+                <a class="nav-link" href="{{ url_for('main.index') }}">Главная
+                  <span class="sr-only">(текущая)</span>
                 </a>
               </li>
               <li class="nav-item {% block nav_about %}{% endblock %}">
-                <a class="nav-link" href="{{ url_for('main.about') }}">About Us</a>
+                <a class="nav-link" href="{{ url_for('main.about') }}">О компании</a>
               </li>
               <li class="nav-item {% block nav_products %}{% endblock %}">
-                <a class="nav-link" href="{{ url_for('products.list') }}">Our Services</a>
+                <a class="nav-link" href="{{ url_for('products.list') }}">Каталог</a>
               </li>
               <li class="nav-item {% block nav_contact %}{% endblock %}">
-                <a class="nav-link" href="{{ url_for('main.contact') }}">Contact Us</a>
+                <a class="nav-link" href="{{ url_for('main.contact') }}">Контакты</a>
               </li>
             </ul>
           </div>
