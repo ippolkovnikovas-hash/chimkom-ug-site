@@ -251,14 +251,14 @@ header .navbar {
 .background-header {
 	top: 0;
 	position: fixed;
-	background-color: #fff!important;
-	box-shadow: 0px 1px 10px rgba(0,0,0,0.1);
+	background-color: #1a1a1a!important;
+	box-shadow: 0px 1px 10px rgba(0,0,0,0.35);
 }
 .background-header .navbar-brand h2 {
 	color: #5fc935!important;
 }
 .background-header .navbar-nav a.nav-link {
-	color: #1e1e1e!important;
+	color: #f5f5f5!important;
 }
 .background-header .navbar-nav .nav-link:hover,
 .background-header .navbar-nav .active>.nav-link,
@@ -1427,7 +1427,7 @@ footer .contact-form button.filled-button:hover {
     }
 
     .background-header .logo-brand .logo-text {
-        color: #1f1f1f !important;
+        color: #f5f5f5 !important;
     }
 }
 
@@ -1461,5 +1461,5 @@ footer .contact-form button.filled-button:hover {
 }
 
 .background-header .logo-brand .logo-text {
-    color: #1f1f1f !important;
+    color: #f5f5f5 !important;
 }
