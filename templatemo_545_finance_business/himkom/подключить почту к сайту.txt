@@ -1,0 +1,81 @@
+Раз почта уже есть — chimkom-ug@mail.ru — будем отправлять письма через SMTP Mail.ru с помощью библиотеки Flask-Mail. БД пока не трогаем, всё сохраняем прямо в письмо.
+
+Шаг 1 — получить пароль приложения на Mail.ru
+Обычный пароль от почты не сработает для SMTP, нужен отдельный пароль:
+
+Зайди в настройки почты mail.ru → "Пароль и безопасность"
+
+Найди раздел "Пароли для внешних приложений" и создай новый пароль
+
+Сохрани его — он понадобится в конфиге, обычный пароль от аккаунта туда не подходит
+
+Шаг 2 — установить Flask-Mail
+bash
+pip install Flask-Mail
+И добавь в requirements.txt:
+
+text
+Flask-Mail
+Шаг 3 — настройки в .flaskenv или config.py
+Не хранить пароль прямо в коде — добавь в .flaskenv:
+
+text
+MAIL_USERNAME=chimkom-ug@mail.ru
+MAIL_PASSWORD=твой_пароль_приложения
+В config.py добавь настройки SMTP Mail.ru:
+
+python
+import os
+
+class Config:
+    MAIL_SERVER = "smtp.mail.ru"
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    MAIL_USE_TLS = False
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_DEFAULT_SENDER = os.environ.get("MAIL_USERNAME")
+Шаг 4 — подключить Mail в app/__init__.py
+python
+from flask_mail import Mail
+
+mail = Mail()
+
+def create_app(config_name=None):
+    ...
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    mail.init_app(app)
+    ...
+Шаг 5 — обработчик формы (view-функция)
+В app/main/routes.py добавь маршрут, куда форма будет отправлять POST:
+
+python
+from flask import request, redirect, url_for, flash
+from app import mail
+from flask_mail import Message
+
+@bp.route("/callback", methods=["POST"])
+def callback():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    subject = request.form.get("subject")
+    message_text = request.form.get("message")
+
+    msg = Message(
+        subject=f"Заявка с сайта: {subject}",
+        recipients=["chimkom-ug@mail.ru"],
+        body=f"Имя: {name}\nE-mail: {email}\n\nСообщение:\n{message_text}"
+    )
+    mail.send(msg)
+
+    flash("Спасибо! Ваша заявка отправлена.")
+    return redirect(url_for("main.index"))
+Шаг 6 — обновить форму в index.html
+Заменить action="" на реальный маршрут:
+
+xml
+<form id="contact" action="{{ url_for('main.callback') }}" method="post">
+После этого нажатие "Отправить" будет реально слать письмо на chimkom-ug@mail.ru с содержимым формы.
+
+Пришли мне точное название blueprint и функции главной страницы (обычно main.index), чтобы я подогнал redirect точно под твою структуру — если оно другое, поправлю код.

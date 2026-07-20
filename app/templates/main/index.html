@@ -65,37 +65,37 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Financial <em>Services</em></h2>
-              <span>Aliquam id urna imperdiet libero mollis hendrerit</span>
+              <h2>Направления <em>работы</em></h2>
+              <span>Почему с нами выгодно работать</span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="service-item">
-              <img src="{{ url_for('static', filename='images/service_01.jpg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/service_01.jpg') }}" alt="Добавки для бетона">
               <div class="down-content">
-                <h4>Digital Currency</h4>
-                <p>Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.</p>
-                <a href="" class="filled-button">Read More</a>
+                <h4>Добавки для бетона</h4>
+                <p>Наша компания предоставляет готовые решения для Вас. Добавки для любых типов бетона.</p>
+                <a href="{{ url_for('products.list') }}" class="filled-button">Каталог</a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="service-item">
-              <img src="{{ url_for('static', filename='images/service_02.jpg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/service_02.jpg') }}" alt="Подборы составов">
               <div class="down-content">
-                <h4>Market Analysis</h4>
-                <p>Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.</p>
-                <a href="" class="filled-button">Read More</a>
+                <h4>Подборы составов</h4>
+                <p>Профессиональные сотрудники проведут качественный подбор состава бетонной смеси именно для Вашего производства.</p>
+                <a href="{{ url_for('main.contact') }}" class="filled-button">Связаться</a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="service-item">
-              <img src="{{ url_for('static', filename='images/service_03.jpg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/service_03.jpg') }}" alt="Контроль качества">
               <div class="down-content">
-                <h4>Historical Data</h4>
-                <p>Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.</p>
-                <a href="" class="filled-button">Read More</a>
+                <h4>Контроль качества</h4>
+                <p>Команда наших технологов контролирует качество бетона клиентов непосредственно на объектах.</p>
+                <a href="{{ url_for('main.contact') }}" class="filled-button">Контакты</a>
               </div>
             </div>
           </div>
@@ -108,37 +108,41 @@
         <div class="row">
           <div class="col-md-6">
             <div class="left-content">
-              <span>Lorem ipsum dolor sit amet</span>
-              <h2>Our solutions for your <em>business growth</em></h2>
-              <p>Pellentesque ultrices at turpis in vestibulum. Aenean pretium elit nec congue elementum. Nulla luctus laoreet porta. Maecenas at nisi tempus, porta metus vitae, faucibus augue. 
-              <br><br>Fusce et venenatis ex. Quisque varius, velit quis dictum sagittis, odio velit molestie nunc, ut posuere ante tortor ut neque.</p>
-              <a href="" class="filled-button">Read More</a>
+              <span>Работаем на результат</span>
+              <h2>Наши решения для <em>вашего производства</em></h2>
+              <p>Сочетание надежности и стабильности качества выпускаемой продукции, а также профессиональный подход к техническому сопровождению и обслуживанию клиентов, позволяют предлагать нашим партнерам оптимальные решения стоящих перед ними задач.
+              <br><br>Производство нашей продукции осуществляется на собственном заводе под постоянным контролем высококвалифицированных специалистов. Наличие строительной лаборатории позволяет нам оперативно реагировать на изменения потребностей рынка производителей бетона.</p>
+              <a href="{{ url_for('main.about') }}" class="filled-button">О компании</a>
             </div>
           </div>
           <div class="col-md-6 align-self-center">
             <div class="row">
               <div class="col-md-6">
                 <div class="count-area-content">
-                  <div class="count-digit">945</div>
-                  <div class="count-title">Work Hours</div>
+                  <div class="count-digit">15</div>
+                  <div class="count-title">Лет на рынке</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="count-area-content">
-                  <div class="count-digit">1280</div>
-                  <div class="count-title">Great Reviews</div>
+                    <div class="count-number">
+                        <div class="count-digit">1000</div><span class="count-plus">+</span>
+                    </div>
+                    <div class="count-title">Выполненных объектов</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="count-area-content">
-                  <div class="count-digit">578</div>
-                  <div class="count-title">Projects Done</div>
+                    <div class="count-number">
+                        <div class="count-digit">100</div><span class="count-plus">+</span>
+                    </div>
+                    <div class="count-title">Клиентов</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="count-area-content">
-                  <div class="count-digit">26</div>
-                  <div class="count-title">Awards Won</div>
+                  <div class="count-digit">7</div>
+                  <div class="count-title">Регионов поставки</div>
                 </div>
               </div>
             </div>
@@ -155,72 +159,18 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="left-image">
-                    <img src="{{ url_for('static', filename='images/more-info.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='images/more-info.jpg') }}" alt="ХИМКОМ-ЮГ">
                   </div>
                 </div>
                 <div class="col-md-6 align-self-center">
                   <div class="right-content">
-                    <span>Who we are</span>
-                    <h2>Get to know about <em>our company</em></h2>
-                    <p>Curabitur pulvinar sem a leo tempus facilisis. Sed non sagittis neque. Nulla conse quat tellus nibh, id molestie felis sagittis ut. Nam ullamcorper tempus ipsum in cursus<br><br>Praes end at dictum metus. Morbi id hendrerit lectus, nec dapibus ex. Etiam ipsum quam, luctus eu egestas eget, tincidunt</p>
-                    <a href="#" class="filled-button">Read More</a>
+                    <span></span>
+                    <h2>Пора знакомиться с <em>нашей компанией</em></h2>
+                    <p>ООО «Химком-ЮГ» – торгово-производственная компания, специализирующаяся на строительной химии. Компания существует на рынке более 15 лет, базируется в г. Краснодар и имеет торговые представительства по регионам РФ.<br><br>Основное направление нашей деятельности – производство химических добавок для бетона: суперпластификаторы, гиперпластификаторы, замедлители, ускорители, противоморозные и комплексные добавки. К дополнительным направлениям нашей деятельности относятся: производство разделительной смазки для опалубки и форм.</p>
+                    <a href="{{ url_for('main.about') }}" class="filled-button">О компании</a>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonials">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>What they say <em>about us</em></h2>
-              <span>testimonials from our greatest clients</span>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="owl-testimonials owl-carousel">
-              
-              <div class="testimonial-item">
-                <div class="inner-content">
-                  <h4>George Walker</h4>
-                  <span>Chief Financial Analyst</span>
-                  <p>"Nulla ullamcorper, ipsum vel condimentum congue, mi odio vehicula tellus, sit amet malesuada justo sem sit amet quam. Pellentesque in sagittis lacus."</p>
-                </div>
-                <img src="http://placehold.it/60x60" alt="">
-              </div>
-              
-              <div class="testimonial-item">
-                <div class="inner-content">
-                  <h4>John Smith</h4>
-                  <span>Market Specialist</span>
-                  <p>"In eget leo ante. Sed nibh leo, laoreet accumsan euismod quis, scelerisque a nunc. Mauris accumsan, arcu id ornare malesuada, est nulla luctus nisi."</p>
-                </div>
-                <img src="http://placehold.it/60x60" alt="">
-              </div>
-              
-              <div class="testimonial-item">
-                <div class="inner-content">
-                  <h4>David Wood</h4>
-                  <span>Chief Accountant</span>
-                  <p>"Ut ultricies maximus turpis, in sollicitudin ligula posuere vel. Donec finibus maximus neque, vitae egestas quam imperdiet nec. Proin nec mauris eu tortor consectetur tristique."</p>
-                </div>
-                <img src="http://placehold.it/60x60" alt="">
-              </div>
-              
-              <div class="testimonial-item">
-                <div class="inner-content">
-                  <h4>Andrew Boom</h4>
-                  <span>Marketing Head</span>
-                  <p>"Curabitur sollicitudin, tortor at suscipit volutpat, nisi arcu aliquet dui, vitae semper sem turpis quis libero. Quisque vulputate lacinia nisl ac lobortis."</p>
-                </div>
-                <img src="http://placehold.it/60x60" alt="">
-              </div>
-              
             </div>
           </div>
         </div>
@@ -232,8 +182,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Request a <em>call back</em></h2>
-              <span>Etiam suscipit ante a odio consequat</span>
+              <h2>Заказать обратный <em>звонок</em></h2>
+              <span></span>
             </div>
           </div>
           <div class="col-md-12">
@@ -242,27 +192,27 @@
                 <div class="row">
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Ваше имя" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="Ваш E-mail" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Тема обращения" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение" required=""></textarea>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <button type="submit" id="form-submit" class="border-button">Send Message</button>
+                      <button type="submit" id="form-submit" class="border-button">Отправить</button>
                     </fieldset>
                   </div>
                 </div>
@@ -306,4 +256,60 @@
     </div>
 
 
+
 {% endblock %}
+
+<!-- Footer Starts Here -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 footer-item">
+        <h4>ХИМКОМ-ЮГ</h4>
+        <p>Мы работаем, чтоб вы были спокойны.</p>
+        <ul class="social-icons">
+          <li><a href="https://wa.me/79624238118" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+          <li><a href="https://t.me/your_telegram" target="_blank"><i class="fa fa-telegram"></i></a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 footer-item">
+        <h4>Дополнительно</h4>
+        <ul class="menu-list">
+          <li><a href="{{ url_for('main.index') }}">Главная</a></li>
+          <li><a href="{{ url_for('main.about') }}">О компании</a></li>
+          <li><a href="{{ url_for('products.list') }}">Каталог</a></li>
+          <li><a href="{{ url_for('main.contact') }}">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 footer-item last-item">
+        <h4>Свяжитесь с нами</h4>
+        <div class="contact-form">
+          <form id="contact footer-contact" action="{{ url_for('main.callback') }}" method="post">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input name="name" type="text" class="form-control" id="name" placeholder="Ваше имя" required="">
+                </fieldset>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="Ваш E-mail" required="">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение" required=""></textarea>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="filled-button">Отправить</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- sub-footer с копирайтом удалён -->
