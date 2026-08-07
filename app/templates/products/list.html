@@ -7,13 +7,13 @@
   .product-card {
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: box-shadow 0.3s ease;
   }
   .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
   .product-header {
-    padding: 1.2rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -31,63 +31,28 @@
     transition: max-height 0.5s ease;
     background: #fff;
   }
-  .product-card.open .product-body { max-height: 5000px; }
+  .product-card.open .product-body { max-height: 3000px; }
   .product-body-inner { padding: 1.5rem; }
-  .spec-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin: 0.2rem;
-  }
-  .spec-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-  }
-  .spec-table th {
-    text-align: left;
-    padding: 0.6rem;
-    font-weight: 600;
-  }
-  .spec-table td {
-    padding: 0.6rem;
-  }
-  .spec-table tr:nth-child(even) { background: #f8f9fa; }
-  .green-theme .product-header { background: #4CAF50; color: #fff; }
-  .green-theme .spec-badge { background: #e8f5e9; color: #2e7d32; }
-  .green-theme .spec-table th { background: #e8f5e9; color: #2e7d32; }
-  .green-theme .section-title { color: #2e7d32; }
-  .blue-theme .product-header { background: #1976D2; color: #fff; }
-  .blue-theme .spec-badge { background: #e3f2fd; color: #1565C0; }
-  .blue-theme .spec-table th { background: #e3f2fd; color: #1565C0; }
-  .blue-theme .section-title { color: #1565C0; }
   .product-img {
     width: 100%;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    display: block;
   }
   .product-subtitle {
     font-size: 0.9rem;
     opacity: 0.9;
     margin-top: 0.2rem;
   }
-  .product-body h5 {
-    font-weight: 700;
-    margin-top: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .product-body ul { line-height: 1.8; }
   .category-header {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 2.5rem 0 1.5rem;
     padding-bottom: 0.5rem;
   }
+  .green-theme .product-header { background: #4CAF50; color: #fff; }
+  .green-theme .category-header { color: #2e7d32; border-bottom: 2px solid #4CAF50; }
+  .blue-theme .product-header { background: #1976D2; color: #fff; }
+  .blue-theme .category-header { color: #1565C0; border-bottom: 2px solid #1976D2; }
 </style>
 {% endblock %}
 
@@ -108,9 +73,8 @@
     <div class="container" style="padding: 2rem 0 4rem;">
 
       <!-- Категория 1: Летние добавки -->
-      <h3 class="category-header green-theme section-title">Добавки для товарного бетона и производства ЖБИ</h3>
+      <h3 class="category-header green-theme">Добавки для товарного бетона и производства ЖБИ</h3>
 
-      <!-- ХИМКОМ Ф-1 -->
       <div class="product-card green-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -121,49 +85,11 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-F1-4.jpg') }}" alt="Химком Ф-1" class="product-img">
-                <div>
-                  <span class="spec-badge"><i class="fa fa-snowflake-o"></i> -5°C</span>
-                  <span class="spec-badge"><i class="fa fa-tint"></i> W20</span>
-                  <span class="spec-badge"><i class="fa fa-cube"></i> B60</span>
-                  <span class="spec-badge"><i class="fa fa-thermometer-half"></i> +30°C</span>
-                  <span class="spec-badge"><i class="fa fa-repeat"></i> F300</span>
-                </div>
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Коричневая жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,140 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>9,5 ± 1</td></tr>
-                  <tr><th>Дозировка</th><td>0,8–1,6%</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком Ф-1» является высокоэффективным суперпластификатором, новейшим регулятором реологических свойств и структурообразования бетона. Представляет собой водный раствор модифицированных лигносульфонатов, поликарбоксилатных эфиров, глюконата натрия и пеногасителя.</p>
-                <h5 class="section-title">Область применения</h5>
-                <p>Предназначен для производства товарных тяжелых и мелкозернистых бетонных смесей в строительстве различного назначения: гражданском, промышленном, транспортном и т.д. Позволяет получать бетонные смеси высокой подвижности с длительной сохраняемостью. Может применяться для производства самоуплотняющихся бетонных смесей.</p>
-                <h5 class="section-title">Эффективность применения</h5>
-                <ul>
-                  <li>получение высокоподвижных бетонных смесей с низким водоцементным отношением и высокой сохраняемостью;</li>
-                  <li>снижение водоцементного отношения за счет суперводоредуцирующего эффекта;</li>
-                  <li>снижение расхода цемента и предотвращение трещин при твердении;</li>
-                  <li>получение высоких технологических свойств по удобоукладываемости, однородности и связности;</li>
-                  <li>улучшение физических свойств бетона: плотности, морозостойкости, водонепроницаемости, долговечности;</li>
-                  <li>возможность создания изделий сложных геометрических форм с качественной поверхностью.</li>
-                </ul>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавка вводится в количестве 0,8–1,6% от массы вяжущего вместе с водой затворения. Оптимальная дозировка подбирается опытным путём. Минимальный срок хранения — 1 год в закрытой заводской таре. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-F1-4.jpg') }}" alt="Химком Ф-1" class="product-img">
           </div>
         </div>
       </div>
 
-      <!-- ХИМКОМ Ф-3 -->
       <div class="product-card green-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -174,46 +100,11 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-F3-5.jpg') }}" alt="Химком Ф-3" class="product-img">
-                <div>
-                  <span class="spec-badge"><i class="fa fa-snowflake-o"></i> -3°C</span>
-                  <span class="spec-badge"><i class="fa fa-tint"></i> W12</span>
-                  <span class="spec-badge"><i class="fa fa-cube"></i> B40</span>
-                  <span class="spec-badge"><i class="fa fa-thermometer-half"></i> +25°C</span>
-                </div>
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Коричневая жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,150 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>7,5 ± 1</td></tr>
-                  <tr><th>Дозировка</th><td>0,8–1,7%</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком Ф-3» – это суперпластификатор с эффектом замедления схватывания. Представляет собой водный раствор модифицированных лигносульфонатов, глюконата натрия и пеногасителя.</p>
-                <h5 class="section-title">Область применения</h5>
-                <p>Предназначен для производства товарных бетонных и растворных смесей повышенной подвижности и сохраняемости. Позволяет сохранять подвижность и пластичность смесей на протяжении нескольких часов, что важно при работе при высоких температурах (выше +25°C) и/или длительной транспортировке.</p>
-                <h5 class="section-title">Эффективность применения</h5>
-                <ul>
-                  <li>получение бетонных и растворных смесей высокой подвижности с длительным временем сохраняемости;</li>
-                  <li>низкая чувствительность к изменениям температуры и составу бетонной смеси;</li>
-                  <li>повышение морозостойкости, водонепроницаемости и долговечности бетона;</li>
-                  <li>снижение расхода вяжущего в составе бетона.</li>
-                </ul>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавка вводится в количестве 0,8–1,7% от массы вяжущего вместе с водой затворения. Минимальный срок хранения — 1 год. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-F3-5.jpg') }}" alt="Химком Ф-3" class="product-img">
           </div>
         </div>
       </div>
 
-      <!-- ХИМКОМ ФП -->
       <div class="product-card green-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -224,48 +115,11 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-FP-6.jpg') }}" alt="Химком ФП" class="product-img">
-                <div>
-                  <span class="spec-badge"><i class="fa fa-tint"></i> W20</span>
-                  <span class="spec-badge"><i class="fa fa-cube"></i> B60</span>
-                  <span class="spec-badge"><i class="fa fa-thermometer-half"></i> +30°C</span>
-                  <span class="spec-badge"><i class="fa fa-repeat"></i> F300</span>
-                </div>
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Жёлто-оранжевая жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,030 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>3 ± 1</td></tr>
-                  <tr><th>Дозировка</th><td>0,6–1,5%</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком ФП» представляет собой водный раствор поликарбоксилатных эфиров, их комплексов и пеногасителя.</p>
-                <h5 class="section-title">Область применения</h5>
-                <p>Предназначена для производства товарных тяжелых и мелкозернистых бетонных смесей. Позволяет получать смеси высокой подвижности с длительной сохраняемостью. Подходит для тепловлажностной обработки и производства высокопрочных бетонов. Может применяться для самоуплотняющихся смесей.</p>
-                <h5 class="section-title">Эффективность применения</h5>
-                <ul>
-                  <li>может быть подобрана под индивидуальные требования к составу бетонной смеси;</li>
-                  <li>получение высокоподвижных смесей с низким водоцементным отношением;</li>
-                  <li>снижение водоцементного отношения и обеспечение высокой прочности бетона;</li>
-                  <li>снижение расхода цемента и предотвращение трещин;</li>
-                  <li>улучшение плотности, морозостойкости, водонепроницаемости и долговечности;</li>
-                  <li>возможность создания изделий сложных форм с качественной поверхностью.</li>
-                </ul>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавка вводится в количестве 0,6–1,5% от массы вяжущего вместе с водой затворения. Минимальный срок хранения — 1 год. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-FP-6.jpg') }}" alt="Химком ФП" class="product-img">
           </div>
         </div>
       </div>
 
-      <!-- ХИМКОМ AERO -->
       <div class="product-card green-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -276,46 +130,14 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-AERO-7.jpg') }}" alt="Химком AERO" class="product-img">
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Прозрачная бесцветная жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,005 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>8 ± 1</td></tr>
-                  <tr><th>Дозировка</th><td>0,008–0,014%</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком AERO» является воздухововлекающей добавкой и применяется с целью вовлечения в бетонные и растворные смеси определенного количества воздуха для создания системы микропор, равномерно распределенных в толще бетона. Представляет собой водный раствор синтетических ПАВ.</p>
-                <h5 class="section-title">Область применения и эффективность</h5>
-                <ul>
-                  <li>повышение морозостойкости бетона;</li>
-                  <li>повышение водонепроницаемости бетона;</li>
-                  <li>уменьшение плотности готовой конструкции на 50–250 кг/м³;</li>
-                  <li>позволяет использовать вместо пористого песка обычный кварцевый;</li>
-                  <li>уменьшение водопотребности смеси и расхода пористых заполнителей;</li>
-                  <li>повышение тепло- и звукоизоляционных качеств конструкций;</li>
-                  <li>уменьшение отделения цементного молока;</li>
-                  <li>повышение связности и однородности смеси при транспортировке;</li>
-                  <li>обеспечение лучшего уплотнения бетонных и растворных смесей.</li>
-                </ul>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавка вводится в количестве 0,008–0,014% от массы вяжущего вместе с водой затворения. Минимальный срок хранения — 1 год. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-AERO-7.jpg') }}" alt="Химком AERO" class="product-img">
           </div>
         </div>
       </div>
 
       <!-- Категория 2: Зимние добавки -->
-      <h3 class="category-header blue-theme section-title">Добавки для зимнего бетонирования</h3>
+      <h3 class="category-header blue-theme">Добавки для зимнего бетонирования</h3>
 
-      <!-- ХИМКОМ ФРОСТ 20 -->
       <div class="product-card blue-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -326,37 +148,11 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-FROST-20-3.jpg') }}" alt="Химком ФРОСТ 20" class="product-img">
-                <div>
-                  <span class="spec-badge"><i class="fa fa-snowflake-o"></i> -20°C</span>
-                </div>
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Коричневая жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,17 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>6,5 ± 1</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком ФРОСТ 20» – противоморозная добавка на основе натриевых и кальциевых солей, не содержит хлоридов, не вызывает коррозии бетона и арматуры. Обеспечивает твердение бетонных и растворных смесей при отрицательной температуре до -20°C и защищает их от замерзания в период от изготовления до укладки и подачи внешнего тепла.</p>
-                <h5 class="section-title">Область применения</h5>
-                <p>Предназначена для проведения бетонных работ в зимнее время при температуре не ниже -20°C.</p>
-                <h5 class="section-title">Эффективность применения</h5>
-                <p>Обладает антифризными свойствами и является ускорителем твердения бетона. Способствует понижению температуры замерзания воды в бетоне и ускоряет процессы гидратации клинкерных минералов. Взаимодействие с продуктами гидратации сопровождается обильным тепловыделением, что положительно влияет на процессы твердения.</p>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавку вносить вместе с водой затворения и тщательно перемешать. Дозировка зависит от температуры окружающей среды, качества инертных и вяжущих материалов. Минимальный срок хранения — 1 год. Защищать от температур ниже 12°C. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-FROST-20-3.jpg') }}" alt="Химком ФРОСТ 20" class="product-img">
           </div>
         </div>
       </div>
 
-      <!-- ХИМКОМ ФК-20М -->
       <div class="product-card blue-theme" onclick="toggleCard(this)">
         <div class="product-header">
           <div>
@@ -367,39 +163,7 @@
         </div>
         <div class="product-body">
           <div class="product-body-inner">
-            <div class="row">
-              <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/products/Khimkom-FK-20M-2.jpg') }}" alt="Химком ФК-20М" class="product-img">
-                <div>
-                  <span class="spec-badge"><i class="fa fa-snowflake-o"></i> -20°C</span>
-                  <span class="spec-badge"><i class="fa fa-tint"></i> W8</span>
-                  <span class="spec-badge"><i class="fa fa-cube"></i> B30</span>
-                </div>
-                <table class="spec-table">
-                  <tr><th>Внешний вид</th><td>Коричневая жидкость</td></tr>
-                  <tr><th>Плотность (20°C)</th><td>1,175 г/см³</td></tr>
-                  <tr><th>pH (20°C)</th><td>6 ± 1</td></tr>
-                  <tr><th>Хранение</th><td>1 год</td></tr>
-                </table>
-              </div>
-              <div class="col-md-7">
-                <h5 class="section-title">Описание</h5>
-                <p>Добавка «Химком ФК-20М» представляет собой комплексную добавку в виде водного раствора натриевых и кальциевых солей, модифицированных лигносульфонатов и пеногасителя. Не содержит хлоридов. Обладает сильным пластифицирующим действием, ускоряет схватывание бетонных и растворных смесей и последующий набор прочности.</p>
-                <h5 class="section-title">Область применения</h5>
-                <p>Применяется в качестве пластифицирующего и противоморозного компонента бетонной смеси в условиях зимнего бетонирования.</p>
-                <h5 class="section-title">Эффективность применения</h5>
-                <ul>
-                  <li>позволяет получать подвижные и пластичные бетонные и растворные смеси;</li>
-                  <li>способствует быстрому набору прочности бетона при отрицательных температурах;</li>
-                  <li>позволяет получать более плотную структуру бетона, что способствует увеличению водо- и паронепроницаемости;</li>
-                  <li>повышает долговечность бетона.</li>
-                </ul>
-                <h5 class="section-title">Дозирование и хранение</h5>
-                <p>Добавку вносить вместе с водой затворения и тщательно перемешать. Дозировка зависит от температуры окружающей среды, качества инертных и вяжущих материалов. Минимальный срок хранения — 1 год. Защищать от температур ниже 12°C. При замерзании — оттаять и перемешать.</p>
-                <h5 class="section-title">Меры предосторожности</h5>
-                <p>Использовать защитные перчатки. При попадании на кожу или слизистые — промыть водой. Продукт нетоксичен и невоспламеняем.</p>
-              </div>
-            </div>
+            <img src="{{ url_for('static', filename='images/products/Khimkom-FK-20M-2.jpg') }}" alt="Химком ФК-20М" class="product-img">
           </div>
         </div>
       </div>
