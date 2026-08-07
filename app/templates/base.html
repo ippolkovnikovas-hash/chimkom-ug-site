@@ -43,7 +43,7 @@
           <div class="col-md-8 col-xs-12">
             <ul class="left-info">
                 <li><a href="tel:+79624238118"><i class="fa fa-phone"></i>+7-962-423-81-18</a></li>
-                <li><a href="mailto:chimkom-ug@mail.ru"><i class="fa fa-envelope"></i>chimkom-ug@mail.ru</a></li>
+                <li><a href="mailto:himkom-ug@mail.ru"><i class="fa fa-envelope"></i>himkom-ug@mail.ru</a></li>
             </ul>
           </div>
           <div class="col-md-4">
@@ -88,6 +88,20 @@
       </nav>
     </header>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
+          {% for category, message in messages %}
+            <div style="padding: 1rem 1.5rem; margin-bottom: 0.5rem; border-radius: 8px; color: #fff; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+                        {% if category == 'success' %}background: #4CAF50;{% elif category == 'error' %}background: #f44336;{% else %}background: #2196F3;{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+        <script>setTimeout(function(){document.querySelectorAll('[style*="position: fixed"]').forEach(function(el){el.style.opacity='0';el.style.transition='opacity 0.5s';});},5000);</script>
+      {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
 
         <!-- Footer Starts Here -->
@@ -124,7 +138,7 @@
           <div class="col-md-3 footer-item last-item">
             <h4>Связаться с нами</h4>
             <div class="contact-form">
-              <form id="contact footer-contact" action="" method="post">
+              <form id="contact footer-contact" action="{{ url_for('main.feedback') }}" method="post">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
