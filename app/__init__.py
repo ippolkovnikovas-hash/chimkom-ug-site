@@ -1,8 +1,11 @@
 import os
 
 from flask import Flask
+from flask_mail import Mail
 
 from config import config
+
+mail = Mail()
 
 
 def create_app(config_name=None):
@@ -11,6 +14,9 @@ def create_app(config_name=None):
 
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+
+    # --- Расширения ---
+    mail.init_app(app)
 
     # --- Регистрация blueprints ---
     from app.main import bp as main_bp
