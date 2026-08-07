@@ -32,7 +32,7 @@ def contact():
 
         msg = Message(
             subject=f"Новое обращение с сайта — {name}",
-            recipients=[current_app.config.get("CONTACT_EMAIL", "chimkom-ug@mail.ru")],
+            recipients=[current_app.config.get("CONTACT_EMAIL", "himkom-ug@mail.ru")],
             body=body,
             reply_to=email,
         )
@@ -63,7 +63,7 @@ def feedback():
 
     msg = Message(
         subject=f"Обращение из футера — {name}",
-        recipients=[current_app.config.get("CONTACT_EMAIL", "chimkom-ug@mail.ru")],
+        recipients=[current_app.config.get("CONTACT_EMAIL", "himkom-ug@mail.ru")],
         body=body,
         reply_to=email,
     )
