@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Tables Layout</title>
+    <style>
+        .price-list {
+           border: 1px solid gray;
+           border-collapse: collapse; 
+        }
+
+        .price-list td, .price-list th {
+           border: 1px solid gray;
+           padding: 5px; 
+        }
+
+        .price-list thead {
+            background-color: lightgray;
+        }
+
+        .price-list tfoot {
+            background-color: lightgreen;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <table class="price-list">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Наименование работ</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>Проектирование макета страницы</td>
+                <td>4000</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Дизайн (оформление)</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>Вёрстка страницы</td>
+                <td>12000</td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>Программирование backend-a</td>
+                <td rowspan="2">7000</td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td>Размещение на хостинге</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Общая стоимость:</td>
+                <td>33000</td>
+            </tr>
+        </tfoot>
+       
+        
+    </table>
+</body>
+
+
+</html>
