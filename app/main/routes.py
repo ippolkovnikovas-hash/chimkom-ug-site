@@ -75,3 +75,29 @@ def feedback():
         flash(f"Ошибка при отправке: {e}", "error")
 
     return redirect(request.referrer or url_for("main.index"))
+
+@bp.route("/callback", methods=["POST"])
+def callback():
+    """Заказ обратного звонка (имя + телефон, без email)."""
+    name = request.form.get("name", "").strip()
+    phone = request.form.get("phone", "").strip()
+
+    if not name or not phone:
+        flash("Укажите имя и телефон.", "error")
+        return redirect(request.referrer or url_for("main.index"))
+
+    body = f"Заявка на обратный звонок\n\nИмя: {name}\nТелефон: {phone}"
+
+    msg = Message(
+        subject=f"Заказ обратного звонка — {name}",
+        recipients=[current_app.config.get("CONTACT_EMAIL", "himkom-ug@mail.ru")],
+        body=body,
+    )
+
+    try:
+        mail.send(msg)
+        flash("Спасибо! Мы перезвоним вам в ближайшее время.", "success")
+    except Exception as e:
+        flash(f"Ошибка при отправке: {e}", "error")
+
+    return redirect(request.referrer or url_for("main.index"))
