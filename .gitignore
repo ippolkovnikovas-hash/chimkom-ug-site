@@ -12,3 +12,6 @@ env/
 instance/
 
 himkom-ug-deploy-status.txt
+
+# Passenger restart marker (server)
+tmp/
