@@ -15,3 +15,6 @@ himkom-ug-deploy-status.txt
 
 # Passenger restart marker (server)
 tmp/
+
+# Local working materials (photos, catalog sources) — not for git
+каталог/
