@@ -2,7 +2,7 @@ import sys
 import os
 
 # Путь к виртуальному окружению (замените u0000000 на ваш логин хостинга)
-INTERP = os.path.expanduser("/var/www/u3602569/data/flaskenv/bin/python")
+INTERP = os.path.expanduser("/var/www/u3602569/data/flaskenv313/bin/python")
 if sys.executable != INTERP:
     os.execl(INTERP, INTERP, *sys.argv)
 

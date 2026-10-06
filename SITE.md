@@ -13,6 +13,7 @@
 ### 1. Деплой и DNS
 - Настроен DNS домена himkom-ug.ru (ns1/ns2.hosting.reg.ru) — сайт открывается.
 - На сервере проверена работа приложения (`passenger_wsgi.py`, `.env`, Python 3.10 через `flaskenv`).
+- 06.10.2026: сервер переведён на Python 3.13 (`/opt/python/python-3.13`, окружение `/var/www/u3602569/data/flaskenv313`, см. `deploy_reg_ru.sh`). Старое окружение `flaskenv` (3.10) оставлено для отката: вернуть путь в `INTERP` в `passenger_wsgi.py` и `touch tmp/restart.txt`. Локальная разработка — тоже Python 3.13.
 - Сервер переведён на git: инициализирован `.git` в рабочей папке, подключён `origin` на GitHub-репозиторий, сделан merge истории (`--allow-unrelated-histories`) с сохранением серверных файлов (`.env`, `.htaccess`, `passenger_wsgi.py`, `deploy_reg_ru.sh`) — теперь обновления можно накатывать через `git pull`.
 
 ### 2. Форма обратного звонка
