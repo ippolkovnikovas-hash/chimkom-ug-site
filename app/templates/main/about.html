@@ -23,24 +23,13 @@
     max-width: 760px;
     margin: 0 auto;
   }
-  .about-kicker {
+  /* Логотип как в шапке сайта, но с тёмным текстом (logo-on-light.png) */
+  .about-logo {
     display: block;
-    text-align: center;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #888;
-    margin-bottom: 10px;
-  }
-  .about-column h2 {
-    text-align: center;
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 40px;
-  }
-  .about-column h2 em {
-    font-style: normal;
-    color: #5fc935;
+    height: 56px;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0 auto 40px;
   }
   .about-column p {
     font-size: 16px;
@@ -93,15 +82,23 @@
 
 {% block content %}
 
-    <!-- Page Heading: широкая полоса с фото, без текста (заголовок — в блоке ниже) -->
-    <div class="page-heading header-text heading-about"></div>
+    <!-- Page Heading -->
+    <div class="page-heading header-text heading-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>О компании</h1>
+            <span>Торгово-производственная компания</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
         <!-- About Info -->
     <div class="about-company">
       <div class="container">
         <div class="about-column">
-          <span class="about-kicker">Торгово-производственная компания</span>
-          <h2>О компании <em>Химком-ЮГ</em></h2>
+          <img class="about-logo" src="{{ url_for('static', filename='images/logo-on-light.png') }}" alt="ХИМКОМ-ЮГ">
           <p class="about-lead">ООО «Химком-ЮГ» – торгово-производственная компания, специализирующаяся на строительной химии. Компания существует на рынке более 15 лет, базируется в г. Краснодар и имеет торговые представительства по регионам РФ.</p>
           <p>Основное направление нашей деятельности – производство химических добавок для бетона: суперпластификаторы, гиперпластификаторы, замедлители, ускорители, противоморозные и комплексные добавки.</p>
           <p>К дополнительным направлениям нашей деятельности относятся:</p>
