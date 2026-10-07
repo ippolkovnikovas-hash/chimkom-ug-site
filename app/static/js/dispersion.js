@@ -100,14 +100,28 @@
     return clamp((vh * 0.85 - rect.top) / (rect.height * 0.9), 0, 1);
   }
 
-  var mouse = { x: -1, y: -1, active: false };
-  box.addEventListener("mousemove", function (e) {
+  var mouse = { x: -1, y: -1, active: false }, lastTouch = -1e9;
+  function setMouse(clientX, clientY) {
     var rect = canvas.getBoundingClientRect();
-    mouse.x = (e.clientX - rect.left) / W;
-    mouse.y = (e.clientY - rect.top) / W;
+    mouse.x = (clientX - rect.left) / W;
+    mouse.y = (clientY - rect.top) / W;
     mouse.active = true;
+  }
+  box.addEventListener("mousemove", function (e) {
+    // После касания браузер телефона присылает «мышиное» событие — пропускаем его
+    if (Date.now() - lastTouch < 1000) return;
+    setMouse(e.clientX, e.clientY);
   });
   box.addEventListener("mouseleave", function () { mouse.active = false; });
+  // Телефон: палец расталкивает частицы так же, как курсор; прокрутку не блокируем
+  function onTouch(e) {
+    var t = e.touches[0];
+    if (t) { lastTouch = Date.now(); setMouse(t.clientX, t.clientY); }
+  }
+  box.addEventListener("touchstart", onTouch, { passive: true });
+  box.addEventListener("touchmove", onTouch, { passive: true });
+  box.addEventListener("touchend", function () { mouse.active = false; }, { passive: true });
+  box.addEventListener("touchcancel", function () { mouse.active = false; }, { passive: true });
 
   var placed = false;
   function step(time) {

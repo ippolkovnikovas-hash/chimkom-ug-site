@@ -58,6 +58,23 @@
                           url("{{ url_for('static', filename='images/slide_03.jpg') }}");
         background-position: center 70%;
       }
+      /* «Молекулярная сетка» поверх фото шапки (js/molecules.js), текст — над ней */
+      .page-heading {
+        position: relative;
+        overflow: hidden;
+      }
+      .page-heading .container {
+        position: relative;
+        z-index: 2;
+      }
+      .molecules-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+      }
     </style>
 
     {% block extra_css %}{% endblock %}
@@ -232,6 +249,7 @@
     <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
     <script src="{{ url_for('static', filename='js/slick.js') }}"></script>
     <script src="{{ url_for('static', filename='js/accordions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/molecules.js') }}"></script>
 
     {% block extra_js %}{% endblock %}
   </body>
