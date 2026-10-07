@@ -113,15 +113,14 @@
     setMouse(e.clientX, e.clientY);
   });
   box.addEventListener("mouseleave", function () { mouse.active = false; });
-  // Телефон: палец расталкивает частицы так же, как курсор; прокрутку не блокируем
-  function onTouch(e) {
-    var t = e.touches[0];
-    if (t) { lastTouch = Date.now(); setMouse(t.clientX, t.clientY); }
+  // Телефон: палец расталкивает частицы после тапа по блоку (js/touch-play.js)
+  box.addEventListener("touchstart", function () { lastTouch = Date.now(); }, { passive: true });
+  if (window.touchPlay) {
+    window.touchPlay(box, function (x, y) {
+      lastTouch = Date.now();
+      setMouse(x, y);
+    }, function () { mouse.active = false; });
   }
-  box.addEventListener("touchstart", onTouch, { passive: true });
-  box.addEventListener("touchmove", onTouch, { passive: true });
-  box.addEventListener("touchend", function () { mouse.active = false; }, { passive: true });
-  box.addEventListener("touchcancel", function () { mouse.active = false; }, { passive: true });
 
   var placed = false;
   function step(time) {

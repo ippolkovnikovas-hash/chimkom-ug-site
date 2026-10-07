@@ -75,6 +75,38 @@
         z-index: 1;
         pointer-events: none;
       }
+      /* Телефон: анимации включаются тапом (js/touch-play.js), тогда зона не прокручивается */
+      .touch-play-active {
+        touch-action: none;
+      }
+      .touch-play-hint {
+        display: none;
+      }
+      @media (hover: none) {
+        .touch-play-hint {
+          display: block;
+          position: absolute;
+          left: 50%;
+          bottom: 14px;
+          transform: translateX(-50%);
+          z-index: 3;
+          padding: 5px 12px;
+          border-radius: 20px;
+          background: rgba(0, 0, 0, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 12px;
+          letter-spacing: 0;
+          text-transform: none;
+          white-space: nowrap;
+          pointer-events: none;
+          transition: border-color 0.3s, color 0.3s;
+        }
+        .touch-play-active .touch-play-hint {
+          border-color: #5fc935;
+          color: #fff;
+        }
+      }
     </style>
 
     {% block extra_css %}{% endblock %}
@@ -249,6 +281,7 @@
     <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
     <script src="{{ url_for('static', filename='js/slick.js') }}"></script>
     <script src="{{ url_for('static', filename='js/accordions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/touch-play.js') }}"></script>
     <script src="{{ url_for('static', filename='js/molecules.js') }}"></script>
 
     {% block extra_js %}{% endblock %}

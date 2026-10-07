@@ -55,14 +55,17 @@
     setPointer(e.clientX, e.clientY);
   });
   hero.addEventListener("mouseleave", function () { pointer.on = false; });
-  function onTouch(e) {
-    var t = e.touches[0];
-    if (t) { setPointer(t.clientX, t.clientY); pointer.lastTouch = performance.now(); }
+  // Любое касание: запоминаем время (для «призрака» и защиты от «мышиных» событий)
+  document.addEventListener("touchstart", function () {
+    pointer.lastTouch = performance.now();
+  }, { passive: true });
+  // Телефон: палец управляет сеткой только после тапа по шапке (js/touch-play.js)
+  if (window.touchPlay) {
+    window.touchPlay(hero, function (x, y) {
+      pointer.lastTouch = performance.now();
+      setPointer(x, y);
+    }, function () { pointer.on = false; });
   }
-  // passive — касание не мешает прокрутке страницы
-  document.addEventListener("touchstart", onTouch, { passive: true });
-  document.addEventListener("touchmove", onTouch, { passive: true });
-  document.addEventListener("touchend", function () { pointer.on = false; }, { passive: true });
 
   function draw(time) {
     ctx.clearRect(0, 0, W, H);
