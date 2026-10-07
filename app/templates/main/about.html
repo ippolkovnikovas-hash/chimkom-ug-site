@@ -16,12 +16,35 @@
     color: #fff !important;
   }
   /* Блок «О компании»: одна узкая колонка по центру */
+  /* Без шапки с фото меню на светлом фоне не читается — делаем его тёмным, как при прокрутке */
+  header {
+    background-color: #1a1a1a !important;
+  }
   .about-company {
-    margin-top: 80px;
+    margin-top: 180px;
   }
   .about-column {
     max-width: 760px;
     margin: 0 auto;
+  }
+  .about-kicker {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  .about-column h2 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  .about-column h2 em {
+    font-style: normal;
+    color: #5fc935;
   }
   .about-column p {
     font-size: 16px;
@@ -74,22 +97,12 @@
 
 {% block content %}
 
-    <!-- Page Heading -->
-    <div class="page-heading header-text">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>О компании</h1>
-            <span>ООО «Химком-ЮГ» — строительная химия</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
         <!-- About Info -->
     <div class="about-company">
       <div class="container">
         <div class="about-column">
+          <span class="about-kicker">Торгово-производственная компания</span>
+          <h2>О компании <em>Химком-ЮГ</em></h2>
           <p class="about-lead">ООО «Химком-ЮГ» – торгово-производственная компания, специализирующаяся на строительной химии. Компания существует на рынке более 15 лет, базируется в г. Краснодар и имеет торговые представительства по регионам РФ.</p>
           <p>Основное направление нашей деятельности – производство химических добавок для бетона: суперпластификаторы, гиперпластификаторы, замедлители, ускорители, противоморозные и комплексные добавки.</p>
           <p>К дополнительным направлениям нашей деятельности относятся:</p>
