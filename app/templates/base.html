@@ -21,6 +21,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-finance-business.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
 
+    <style>
+      /* Однородный светло-серый фон страниц; карточки сливаются с фоном */
+      body,
+      .team-item .down-content {
+        background-color: #f7f7f7;
+      }
+    </style>
+
     {% block extra_css %}{% endblock %}
   </head>
 
