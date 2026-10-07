@@ -1,6 +1,79 @@
 {% extends "base.html" %}
 {% block title %}ХИМКОМ-ЮГ — Контакты{% endblock %}
 {% block nav_contact %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Карточки контактов — как карточки преимуществ на «О компании» */
+  .advantage-card:hover {
+    transform: translateY(-6px);
+    border-color: #4CAF50 !important;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.15);
+  }
+  .advantage-card:hover .advantage-icon {
+    background: #4CAF50 !important;
+  }
+  .advantage-card:hover .advantage-icon i {
+    color: #fff !important;
+  }
+  .contact-information .advantage-card a {
+    font-weight: 600;
+    color: #5fc935;
+    font-size: 1.05rem;
+  }
+  /* Переход из «Нашей команды» (/contact#contact-...): карточка видна под меню и подсвечена */
+  .contact-information .advantage-card {
+    scroll-margin-top: 120px;
+  }
+  .contact-information .advantage-card:target {
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 3px #5fc935;
+  }
+  .contact-information .advantage-card .contact-wa {
+    margin-left: 6px;
+    font-size: 1.25rem;
+  }
+  /* Имя сотрудника — ссылка на его карточку в «Нашей команде» */
+  .contact-information .advantage-card a.contact-person {
+    color: #555;
+    font-size: inherit;
+    font-weight: 400;
+    border-bottom: 1px dashed #5fc935;
+  }
+  .contact-information .advantage-card a.contact-person:hover {
+    color: #5fc935;
+  }
+  .contact-information .contact-role-under {
+    margin-top: 0.2rem;
+  }
+  .contact-information .contact-role {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .contact-information.contact-republics {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  .contact-map iframe {
+    display: block;
+    border-radius: 12px;
+  }
+  /* Выбор региона в форме — как поля ввода шаблона */
+  .callback-form .contact-form select {
+    border-radius: 20px;
+    height: 40px;
+    padding: 0 15px;
+    color: #6a6a6a;
+    font-size: 13px;
+    box-shadow: none;
+    border: none;
+    margin-bottom: 35px;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 
     <!-- Page Heading -->
@@ -15,38 +88,74 @@
       </div>
     </div>
 
-    <!-- Contact Info Cards -->
+{% macro contact_card(icon, title, cols, anchor=None) %}
+          <div class="col-md-6 col-lg-{{ 12 // cols }} mb-4">
+            <div class="advantage-card"{% if anchor %} id="{{ anchor }}"{% endif %} style="background: #f7f7f7; border: 2px solid #e9ecef; border-radius: 12px; padding: 1.8rem 1.5rem; height: 100%; text-align: center; transition: all 0.3s ease; cursor: default;">
+              <div class="advantage-icon" style="width: 64px; height: 64px; margin: 0 auto 1.2rem; background: #f0f7f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                <i class="fa {{ icon }}" style="font-size: 1.6rem; color: #4CAF50; transition: all 0.3s ease;"></i>
+              </div>
+              <h4 style="margin-bottom: 0.5rem;">{{ title }}</h4>
+              {{ caller() }}
+            </div>
+          </div>
+{% endmacro %}
+
+    <!-- Краснодар: производство и продажи -->
     <div class="contact-information">
       <div class="container">
+        <div class="section-heading text-center">
+          <h2 style="font-size: 2.2rem; margin-bottom: 2rem;">Краснодар: <em>производство и продажи</em></h2>
+        </div>
         <div class="row">
-          <div class="col-md-3">
-            <div class="contact-item" style="background: #fff; text-align: center; padding: 2rem 1.5rem; border: 1px solid #e9ecef; border-radius: 12px; height: 100%;">
-              <i class="fa fa-phone" style="font-size: 2.2rem; color: #4CAF50; margin-bottom: 1rem;"></i>
-              <h4 style="margin-bottom: 0.5rem;">Телефон</h4>
-              <a href="tel:+79624238118" style="font-size: 1.1rem;">+7-962-423-81-18</a>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="contact-item" style="background: #fff; text-align: center; padding: 2rem 1.5rem; border: 1px solid #e9ecef; border-radius: 12px; height: 100%;">
-              <i class="fa fa-envelope" style="font-size: 2.2rem; color: #4CAF50; margin-bottom: 1rem;"></i>
-              <h4 style="margin-bottom: 0.5rem;">E-Mail</h4>
-              <a href="mailto:himkom-ug@mail.ru" style="font-size: 1.1rem;">himkom-ug@mail.ru</a>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="contact-item" style="background: #fff; text-align: center; padding: 2rem 1.5rem; border: 1px solid #e9ecef; border-radius: 12px; height: 100%;">
-              <i class="fa fa-map-marker" style="font-size: 2.2rem; color: #4CAF50; margin-bottom: 1rem;"></i>
-              <h4 style="margin-bottom: 0.5rem;">Адрес</h4>
-              <p style="font-size: 0.95rem; color: #555; margin: 0;">г. Краснодар,<br>пос. Дружелюбный,<br>ул. Железнодорожная, 3</p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="contact-item" style="background: #fff; text-align: center; padding: 2rem 1.5rem; border: 1px solid #e9ecef; border-radius: 12px; height: 100%;">
-              <i class="fa fa-whatsapp" style="font-size: 2.2rem; color: #4CAF50; margin-bottom: 1rem;"></i>
-              <h4 style="margin-bottom: 0.5rem;">WhatsApp</h4>
-              <a href="https://wa.me/79624238118" target="_blank" style="font-size: 1.1rem;">Написать в WhatsApp</a>
-            </div>
-          </div>
+          {% call contact_card('fa-phone', 'Телефон', 3, 'contact-krasnodar') %}
+              {% set sergey = people['sergey'] %}
+              <a href="tel:+{{ sergey.phone }}">{{ sergey.phone | phone }}</a>
+              <a href="https://wa.me/{{ sergey.phone }}" target="_blank" title="WhatsApp" class="contact-wa"><i class="fa fa-whatsapp"></i></a>
+              <p class="contact-role contact-role-under">
+                <a class="contact-person" href="{{ url_for('main.about', _anchor='team-sergey') }}" title="Карточка сотрудника">{{ sergey.name }}</a>
+              </p>
+              <a href="tel:+79282825871">+7-928-282-58-71</a>
+              <a href="https://wa.me/79282825871" target="_blank" title="WhatsApp" class="contact-wa"><i class="fa fa-whatsapp"></i></a>
+          {% endcall %}
+          {% call contact_card('fa-envelope', 'E-Mail', 3) %}
+              <a href="mailto:chimkom-ug@mail.ru">chimkom-ug@mail.ru</a>
+          {% endcall %}
+          {% call contact_card('fa-map-marker', 'Адрес', 3) %}
+              <p class="contact-role">г. Краснодар,<br>пос. Дружелюбный,<br>ул. Железнодорожная, 3</p>
+          {% endcall %}
+        </div>
+        <div class="contact-map mb-4">
+          <iframe src="https://yandex.ru/map-widget/v1/?text=Краснодар,+поселок+Дружелюбный,+улица+Железнодорожная,+3&z=16&l=map" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Республики Северного Кавказа -->
+    <div class="contact-information contact-republics">
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2 style="font-size: 2.2rem; margin-bottom: 2rem;">Республики <em>Северного Кавказа</em></h2>
+        </div>
+        <div class="row">
+          {% call contact_card('fa-users', 'Республики Северного Кавказа', 4) %}
+              <a href="tel:+79624238118">+7-962-423-81-18</a><br>
+              <a href="https://wa.me/79624238118" target="_blank">WhatsApp</a><br>
+              <a href="mailto:himkom-ug@mail.ru">himkom-ug@mail.ru</a>
+          {% endcall %}
+          {% for region, key in republics %}
+          {% set person = people[key] %}
+          {% call contact_card('fa-user', region, 4, 'contact-' ~ key) %}
+              <p class="contact-role">
+                {% if key in team_people %}
+                <a class="contact-person" href="{{ url_for('main.about', _anchor='team-' ~ key) }}" title="Карточка сотрудника">{{ person.name }}</a>
+                {% else %}
+                {{ person.name }}
+                {% endif %}
+              </p>
+              <a href="tel:+{{ person.phone }}">{{ person.phone | phone }}</a><br>
+              <a href="https://wa.me/{{ person.phone }}" target="_blank">WhatsApp</a>
+          {% endcall %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -79,6 +188,16 @@
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
+                      <select name="region" class="form-control" id="region" required>
+                        <option value="" disabled selected>Ваш регион</option>
+                        {% for code, (title, _) in regions.items() %}
+                        <option value="{{ code }}">{{ title }}</option>
+                        {% endfor %}
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
                       <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение" required=""></textarea>
                     </fieldset>
                   </div>
@@ -93,11 +212,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Map -->
-    <div id="map">
-      <iframe src="https://yandex.ru/map-widget/v1/?text=Краснодар,+поселок+Дружелюбный,+улица+Железнодорожная,+3&z=16&l=map" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
 
 {% endblock %}

@@ -22,7 +22,10 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME", "himkom-ug@mail.ru")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD", "")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_USERNAME", "himkom-ug@mail.ru")
+    # Заявки по республикам и прочим регионам
     CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "himkom-ug@mail.ru")
+    # Заявки по Краснодарскому краю и Ростовской области
+    CONTACT_EMAIL_KRASNODAR = os.environ.get("CONTACT_EMAIL_KRASNODAR", "chimkom-ug@mail.ru")
 
 
 class DevelopmentConfig(Config):

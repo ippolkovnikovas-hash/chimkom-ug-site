@@ -73,6 +73,29 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    /* Переход с «Контактов» по ссылке #team-...: не прятать карточку под фиксированным меню */
+    scroll-margin-top: 100px;
+  }
+  .team .team-item:target {
+    box-shadow: 0 0 0 3px #5fc935;
+  }
+  /* Вся карточка — ссылка на контакты этого сотрудника */
+  a.team-item,
+  a.team-item:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  a.team-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.team-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.15);
+  }
+  .team .team-more {
+    margin: 0;
+    font-weight: 600;
+    color: #5fc935;
   }
   .team .team-item .down-content {
     flex: 1;
@@ -202,36 +225,20 @@
               <span>Профессионалы своего дела</span>
             </div>
           </div>
+          {% for member in team %}
+          {% set person = people[member.person] %}
           <div class="col-md-4">
-            <div class="team-item">
-              <img src="{{ url_for('static', filename='images/team_yunus.jpg') }}" alt="Шахтиев Юнус">
+            <a class="team-item" id="team-{{ member.person }}" href="{{ url_for('main.contact', _anchor=member.contact) }}" title="Контакты">
+              <img src="{{ url_for('static', filename=member.photo) }}" alt="{{ person.name }}">
               <div class="down-content">
-                <h4>Шахтиев Юнус</h4>
-                <span>Менеджер</span>
-                <p>Регион ответственности — Чеченская Республика. Место нахождения — г.&nbsp;Грозный.</p>
+                <h4>{{ person.name }}</h4>
+                <span>{{ member.position }}</span>
+                <p>{{ member.about }}</p>
+                <p class="team-more">Контакты <i class="fa fa-angle-right"></i></p>
               </div>
-            </div>
+            </a>
           </div>
-          <div class="col-md-4">
-            <div class="team-item">
-              <img src="{{ url_for('static', filename='images/team_sergey.jpg') }}" alt="Пастухов Сергей">
-              <div class="down-content">
-                <h4>Пастухов Сергей</h4>
-                <span>Начальник отдела продаж и технологической поддержки</span>
-                <p>Руководит продажами и технологической поддержкой клиентов: подбор добавок для бетона, сопровождение бетонных заводов и решение технологических вопросов на объектах.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="team-item">
-              <img src="{{ url_for('static', filename='images/team_adam.jpg') }}" alt="Хамхоев Адам">
-              <div class="down-content">
-                <h4>Хамхоев Адам</h4>
-                <span>Менеджер</span>
-                <p>Регион ответственности — Республика Ингушетия. Место нахождения — г.&nbsp;Сунжа.</p>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
