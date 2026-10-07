@@ -12,7 +12,88 @@
   .more-info .left-image img {
     mix-blend-mode: multiply;
   }
+  /* Блок «Как работают наши добавки» с анимацией диспергирования */
+  .dispersion {
+    margin-top: 140px;
+  }
+  .dispersion-visual {
+    position: relative;
+    background: #1a1a1a;
+    aspect-ratio: 1 / 1;
+  }
+  .dispersion-visual canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .dispersion-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    white-space: nowrap;
+    pointer-events: none;
+    text-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+  }
+  .dispersion-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 40px;
+  }
+  .dispersion-kicker {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  .dispersion-text h2 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .dispersion-text h2 .nowrap {
+    white-space: nowrap;
+  }
+  .dispersion-text h2 em {
+    font-style: normal;
+    color: #5fc935;
+  }
+  .dispersion-points {
+    margin-top: 30px;
+  }
+  .dispersion-points li {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .dispersion-points strong {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+  @media (max-width: 991px) {
+    .dispersion-text {
+      padding-left: 15px;
+      margin-top: 40px;
+    }
+  }
 </style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dispersion.js') }}"></script>
 {% endblock %}
 {% block content %}
     <!-- Page Content -->
@@ -111,6 +192,31 @@
                 <a href="{{ url_for('main.contact') }}" class="filled-button">Контакты</a>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dispersion">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="dispersion-visual">
+              <canvas id="dispersion-canvas" aria-hidden="true"></canvas>
+              <span class="dispersion-label">ХИМКОМ-ЮГ</span>
+            </div>
+          </div>
+          <div class="col-lg-6 dispersion-text">
+            <div>
+              <span class="dispersion-kicker">Как работают наши добавки</span>
+              <h2>Суперпластификатор <span class="nowrap">ХИМКОМ Ф-3</span> <em>разделяет</em> частицы цемента</h2>
+              <p>Без добавки частицы цемента слипаются в комки и удерживают воду: смесь густая, а лишняя вода снижает прочность бетона. Суперпластификатор оседает на поверхности частиц и отталкивает их друг от друга — смесь становится подвижной при меньшем количестве воды.</p>
+            </div>
+            <ul class="dispersion-points">
+              <li><strong>Подвижность</strong>Смесь легче транспортировать и укладывать</li>
+              <li><strong>Меньше воды</strong>Выше прочность и плотность бетона</li>
+              <li><strong>Однородность</strong>Цемент распределён равномерно по всему объёму</li>
+            </ul>
           </div>
         </div>
       </div>
