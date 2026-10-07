@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="ХИМКОМ-ЮГ — производство добавок для бетона. г. Краснодар.">
     <meta name="author" content="ХИМКОМ-ЮГ">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
 
     <title>{% block title %}ХИМКОМ-ЮГ — добавки для бетона{% endblock %}</title>
 
@@ -26,6 +28,19 @@
       body,
       .team-item .down-content {
         background-color: #f7f7f7;
+      }
+      /* Шрифты: Inter — текст, Inter Tight — заголовки (близки к Suisse Intl, есть кириллица) */
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6,
+      .Modern-Slider .item h4,
+      .request-form h4 {
+        font-family: 'Inter Tight', sans-serif;
+        letter-spacing: -0.01em;
+      }
+      .Modern-Slider .item h4 {
+        letter-spacing: 0;
       }
     </style>
 
