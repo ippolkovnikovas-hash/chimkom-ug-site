@@ -42,6 +42,22 @@
       .Modern-Slider .item h4 {
         letter-spacing: 0;
       }
+      /* Фоны шапок внутренних страниц (вместо стокового фото шаблона) */
+      .page-heading.heading-about {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                          url("{{ url_for('static', filename='images/slide_01.jpg') }}");
+        background-position: center 40%;
+      }
+      .page-heading.heading-contact {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                          url("{{ url_for('static', filename='images/slide_02.jpg') }}");
+        background-position: center bottom;
+      }
+      .page-heading.heading-catalog {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                          url("{{ url_for('static', filename='images/slide_03.jpg') }}");
+        background-position: center 70%;
+      }
     </style>
 
     {% block extra_css %}{% endblock %}

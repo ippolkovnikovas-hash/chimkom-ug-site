@@ -16,12 +16,8 @@
     color: #fff !important;
   }
   /* Блок «О компании»: одна узкая колонка по центру */
-  /* Без шапки с фото меню на светлом фоне не читается — делаем его тёмным, как при прокрутке */
-  header {
-    background-color: #1a1a1a !important;
-  }
   .about-company {
-    margin-top: 180px;
+    margin-top: 100px;
   }
   .about-column {
     max-width: 760px;
@@ -96,6 +92,9 @@
 {% endblock %}
 
 {% block content %}
+
+    <!-- Page Heading: широкая полоса с фото, без текста (заголовок — в блоке ниже) -->
+    <div class="page-heading header-text heading-about"></div>
 
         <!-- About Info -->
     <div class="about-company">
