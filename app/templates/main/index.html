@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}ХИМКОМ-ЮГ — Главная{% endblock %}
 {% block nav_home %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Отступ перед футером (раньше его давал удалённый блок партнёров) */
+  .callback-form {
+    margin-bottom: 140px;
+  }
+</style>
+{% endblock %}
 {% block content %}
     <!-- Page Content -->
     <!-- Banner Starts Here -->
@@ -213,39 +222,4 @@
             </div>
         </div>
     </div>
-
-    <div class="partners">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="owl-partners owl-carousel">
-            
-              <div class="partner-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" title="1" alt="1">
-              </div>
-              
-              <div class="partner-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" title="2" alt="2">
-              </div>
-              
-              <div class="partner-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" title="3" alt="3">
-              </div>
-              
-              <div class="partner-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" title="4" alt="4">
-              </div>
-              
-              <div class="partner-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" title="5" alt="5">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
 {% endblock %}
