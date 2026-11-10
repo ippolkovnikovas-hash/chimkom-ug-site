@@ -27,6 +27,15 @@ class Config:
     # Заявки по Краснодарскому краю и Ростовской области
     CONTACT_EMAIL_KRASNODAR = os.environ.get("CONTACT_EMAIL_KRASNODAR", "chimkom-ug@mail.ru")
 
+    # --- SEO ---
+    # Канонический адрес сайта (без слэша в конце): canonical, sitemap, Open Graph
+    SITE_URL = os.environ.get("SITE_URL", "https://himkom-ug.ru").rstrip("/")
+    # Счётчик Яндекс.Метрики: только цифры; пусто — код не выводится
+    YANDEX_METRIKA_ID = os.environ.get("YANDEX_METRIKA_ID", "").strip()
+    # Коды подтверждения прав на сайт (значение content мета-тега); пусто — тег не выводится
+    YANDEX_VERIFICATION = os.environ.get("YANDEX_VERIFICATION", "").strip()
+    GOOGLE_VERIFICATION = os.environ.get("GOOGLE_VERIFICATION", "").strip()
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
