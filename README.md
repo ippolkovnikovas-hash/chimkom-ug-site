@@ -31,3 +31,8 @@ flask run                        # или: python run.py
 - [ ] Модели `Product` / `Category` + SQLAlchemy, каталог из БД
 - [ ] Blueprint `admin` для управления каталогом
 - [ ] Flask-Migrate, Docker
+
+## SEO
+- План и правила продвижения — `docs/seo/PLAYBOOK.md`; регистрации и подключение для владельца — `docs/seo/ИНСТРУКЦИЯ-ВЛАДЕЛЬЦУ.md`.
+- SEO-агенты — `.claude/agents/`, команды `/seo-weekly` и `/seo-monthly` — `.claude/commands/`; отчёты — `docs/seo/reports/`.
+- Настройки SEO (`SITE_URL`, `YANDEX_METRIKA_ID`, коды подтверждения) — в `.env`, см. `.env.example`.
