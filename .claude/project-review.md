@@ -39,12 +39,11 @@ Flask 3 (фабрика create_app, blueprints main/products), Jinja2, Bootstrap
 ## Выкладка
 
 - Куда: reg.ru, `/var/www/u3602569/data/www/himkom-ug.ru/` (SSH u3602569@31.31.198.58; доступы — в himkom-ug-deploy-status.txt, в git не входит).
-- Как: по возможности git pull на сервере, иначе загрузка изменённых файлов по scp; перезапуск — `touch .restart-app`.
-- Проверка после выкладки: curl -I http://himkom-ug.ru + ключевые страницы, при ошибках — лог `/var/www/u3602569/data/logs/himkom-ug.ru.error.log`.
-- Откат: предыдущий коммит тем же способом (git/scp), `touch .restart-app`.
-- Ожидает первой выкладки для уточнения фактического способа.
+- Как: `git fetch origin && git reset --hard origin/main` на сервере (репозиторий там есть, git 2.43.7), перезапуск — `touch tmp/restart.txt` и `touch .restart-app`. `.env` и `tmp/` на сервере вне git — reset их не трогает.
+- Проверка после выкладки: `curl -I https://himkom-ug.ru` (сейчас 200; http → 302 на https), при ошибках — лог `/var/www/u3602569/data/logs/himkom-ug.ru.error.log`.
+- Откат: `git reset --hard <предыдущий коммит>` на сервере, `touch tmp/restart.txt`.
+- SSH: ключ `~/.ssh/regru_himkom` (без пароля), `ssh -i ~/.ssh/regru_himkom u3602569@31.31.198.58`.
 
 ## Открытые вопросы
 
-- Есть ли git на сервере и является ли каталог сайта репозиторием — проверить при первом подключении.
-- QR-code/ (untracked): коммитим или в .gitignore?
+- На сервере ветка называется `master`, локально `main` — деплой через `reset --hard origin/main`, ветку на сервере не переименовывали.
