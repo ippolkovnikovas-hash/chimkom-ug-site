@@ -77,6 +77,11 @@ class SeoTest(unittest.TestCase):
             self.assertNotIn('title="Max"', html)
             self.assertNotIn('href="#"', html)
 
+    def test_max_icon_is_max_logo_not_generic_bubble(self):
+        html = self.make_client(MAX_URL="https://max.ru/u/abc123").get("/").get_data(as_text=True)
+        self.assertEqual(html.count('class="icon-max"'), 2)  # шапка и футер
+        self.assertNotIn("fa-comment", html)
+
     def test_max_icon_shown_only_for_max_ru_link(self):
         ok = self.make_client(MAX_URL="https://max.ru/u/abc123")
         self.assertIn('href="https://max.ru/u/abc123"', ok.get("/").get_data(as_text=True))
