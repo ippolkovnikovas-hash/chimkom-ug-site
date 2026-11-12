@@ -32,14 +32,8 @@
     transition: max-height 0.5s ease;
     background: #fff;
   }
-  .product-card.open .product-body { max-height: 12000px; } /* текст листа + картинка, на узком экране длинный */
+  .product-card.open .product-body { max-height: 12000px; } /* текст листа, на узком экране длинный */
   .product-body-inner { padding: 1.5rem; }
-  .product-img {
-    width: 100%;
-    height: auto; /* width/height в теге нужны только для резерва места при lazy-загрузке */
-    border-radius: 8px;
-    display: block;
-  }
   .product-subtitle {
     font-size: 0.9rem;
     opacity: 0.9;
@@ -55,7 +49,6 @@
   .green-theme .category-header { color: #2e7d32; border-bottom: 2px solid #4CAF50; }
   .blue-theme .product-header { background: #1976D2; color: #fff; }
   .blue-theme .category-header { color: #1565C0; border-bottom: 2px solid #1976D2; }
-  .product-img { cursor: zoom-in; }
   /* Текст технических листов */
   .product-spec { cursor: auto; margin-bottom: 1.5rem; color: #333; line-height: 1.6; }
   .product-spec p { margin-bottom: 0.8rem; }
@@ -73,7 +66,9 @@
   .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 0.8rem; }
   .spec-table th, .spec-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e3e3e3; vertical-align: top; text-align: left; }
   .spec-table th { font-weight: 600; width: 40%; }
-  .spec-image-note { font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem; }
+  .sheet-link { display: inline-block; font-weight: 600; text-decoration: underline; }
+  .green-theme .sheet-link { color: #2e7d32; }
+  .blue-theme .sheet-link { color: #1565C0; }
 
   /* Lightbox */
   .lightbox {
@@ -165,8 +160,8 @@
               {% endif %}
             </div>
 
-            <p class="spec-image-note">Технический лист (нажмите на изображение, чтобы увеличить):</p>
-            <img src="{{ url_for('static', filename=product.image) }}" alt="Технический лист {{ product.alt }}" width="{{ product.width }}" height="{{ product.height }}" loading="lazy" class="product-img" onclick="openLightbox(this)">
+            <!-- Лист не встраиваем в страницу: подгружается только по клику; без JS ссылка открывает файл -->
+            <a class="sheet-link" href="{{ url_for('static', filename=product.image) }}" target="_blank" rel="noopener" onclick="return openSheet(event, this)"><i class="fa fa-file-image-o"></i> Открыть технический лист (JPG)</a>
           </div>
         </div>
       </div>
@@ -189,10 +184,12 @@ function toggleCard(card) {
   card.classList.toggle('open');
 }
 
-function openLightbox(img) {
+function openSheet(e, link) {
+  e.stopPropagation(); // не сворачивать карточку
   var lb = document.getElementById('lightbox');
-  lb.querySelector('img').src = img.src;
+  lb.querySelector('img').src = link.href;
   lb.classList.add('open');
+  return false; // отменить переход по ссылке
 }
 
 function closeLightbox() {

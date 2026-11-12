@@ -45,13 +45,10 @@ class CatalogTextTest(unittest.TestCase):
     def test_text_click_does_not_collapse_card(self):
         self.assertEqual(self.html.count('class="product-spec" onclick="event.stopPropagation()"'), 6)
 
-    def test_images_exist_and_dimensions_match_template(self):
+    def test_sheet_files_exist_and_linked(self):
         for product in PRODUCTS:
             self.assertTrue(os.path.isfile(os.path.join(STATIC, product["image"])), product["image"])
-            self.assertRegex(
-                self.html,
-                rf'width="{product["width"]}" height="{product["height"]}"[^>]*class="product-img"',
-            )
+            self.assertIn(f'href="/static/{product["image"]}"', self.html)
 
     def test_unique_slugs(self):
         slugs = [p["slug"] for p in PRODUCTS]

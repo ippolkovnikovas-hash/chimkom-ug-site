@@ -61,14 +61,11 @@ class SeoTest(unittest.TestCase):
         html = self.client.get("/").get_data(as_text=True)
         self.assertIn("ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h1>", html)
 
-    def test_product_images_are_lazy_with_dimensions(self):
+    def test_product_sheets_are_links_not_inline_images(self):
         html = self.client.get("/products/").get_data(as_text=True)
-        imgs = re.findall(r'<img [^>]*class="product-img"[^>]*>', html)
-        self.assertEqual(len(imgs), 6)
-        for tag in imgs:
-            self.assertIn('loading="lazy"', tag)
-            self.assertRegex(tag, r'width="\d+" height="\d+"')
-        self.assertIn("height: auto", html)
+        self.assertNotIn("product-img", html)
+        links = re.findall(r'<a class="sheet-link" href="/static/images/products/[^"]+\.jpg"', html)
+        self.assertEqual(len(links), 6)
 
     def test_telegram_link_and_max_hidden_by_default(self):
         for path in ("/", "/about", "/contact", "/products/"):
