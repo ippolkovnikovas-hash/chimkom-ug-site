@@ -90,6 +90,13 @@
         z-index: 1;
         pointer-events: none;
       }
+      /* Значок Max (inline SVG): размер как у иконок Font Awesome рядом, цвет берёт у ссылки */
+      .icon-max {
+        width: 1.15em;
+        height: 1.15em;
+        vertical-align: -0.2em;
+        display: inline-block;
+      }
       /* Телефон: вместо полного скрытия верхней полосы шаблона — компактная версия:
          телефон слева, значки мессенджеров справа (email и «Контакты по регионам» остаются в футере) */
       @media (max-width: 768px) {
@@ -187,7 +194,7 @@
             <ul class="right-icons">
                 <li><a href="https://wa.me/79528684567" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a></li>
                 <li><a rel="nofollow" href="https://t.me/+79624238118" target="_blank" title="Telegram"><i class="fa fa-paper-plane"></i></a></li>
-                {% if max_url %}<li><a rel="nofollow" href="{{ max_url }}" target="_blank" title="Max"><i class="fa fa-comment"></i></a></li>{% endif %}
+                {% if max_url %}<li><a rel="nofollow" href="{{ max_url }}" target="_blank" title="Max" aria-label="Max">{% include "partials/icon_max.html" %}</a></li>{% endif %}
             </ul>
           </div>
         </div>
@@ -251,7 +258,7 @@
             <ul class="social-icons">
               <li><a rel="nofollow" href="https://wa.me/79624238118" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a></li>
               <li><a rel="nofollow" href="https://t.me/+79624238118" target="_blank" title="Telegram"><i class="fa fa-paper-plane"></i></a></li>
-              {% if max_url %}<li><a rel="nofollow" href="{{ max_url }}" target="_blank" title="Max"><i class="fa fa-comment"></i></a></li>{% endif %}
+              {% if max_url %}<li><a rel="nofollow" href="{{ max_url }}" target="_blank" title="Max" aria-label="Max">{% include "partials/icon_max.html" %}</a></li>{% endif %}
             </ul>
           </div>
           <div class="col-md-3 footer-item">
