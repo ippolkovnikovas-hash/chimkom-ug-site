@@ -61,6 +61,15 @@ class SeoTest(unittest.TestCase):
         html = self.client.get("/").get_data(as_text=True)
         self.assertIn("ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h1>", html)
 
+    def test_product_images_are_lazy_with_dimensions(self):
+        html = self.client.get("/products/").get_data(as_text=True)
+        imgs = re.findall(r'<img [^>]*class="product-img"[^>]*>', html)
+        self.assertEqual(len(imgs), 6)
+        for tag in imgs:
+            self.assertIn('loading="lazy"', tag)
+            self.assertRegex(tag, r'width="\d+" height="\d+"')
+        self.assertIn("height: auto", html)
+
     def test_canonical_ignores_query_string(self):
         html = self.client.get("/about?utm_source=x").get_data(as_text=True)
         self.assertIn('<link rel="canonical" href="https://example.test/about">', html)
