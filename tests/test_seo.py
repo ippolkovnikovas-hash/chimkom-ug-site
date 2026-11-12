@@ -54,6 +54,13 @@ class SeoTest(unittest.TestCase):
         self.assertEqual(len(titles), 4, "у страниц должны быть разные title")
         self.assertEqual(len(descriptions), 4, "у страниц должны быть разные description")
 
+    def test_each_page_has_exactly_one_h1(self):
+        for path in ("/", "/products/", "/about", "/contact"):
+            html = self.client.get(path).get_data(as_text=True)
+            self.assertEqual(len(re.findall(r"<h1[ >]", html)), 1, path)
+        html = self.client.get("/").get_data(as_text=True)
+        self.assertIn("ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h1>", html)
+
     def test_canonical_ignores_query_string(self):
         html = self.client.get("/about?utm_source=x").get_data(as_text=True)
         self.assertIn('<link rel="canonical" href="https://example.test/about">', html)

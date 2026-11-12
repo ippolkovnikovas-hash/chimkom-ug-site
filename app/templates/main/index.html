@@ -5,6 +5,24 @@
 
 {% block extra_css %}
 <style>
+  /* H1 страницы — строка над заголовком первого слайда; выглядит как прежний h6 слайдера */
+  .Modern-Slider .item h1 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #5fc935;
+    animation: fadeOutRight 1s both;
+  }
+  .Modern-Slider .item.slick-active h1 {
+    animation: fadeInDown 1s both 1s;
+  }
+  @media (max-width: 768px) {
+    .Modern-Slider .item h1 {
+      font-size: 18px;
+    }
+  }
   /* Отступ перед футером (раньше его давал удалённый блок партнёров) */
   .callback-form {
     margin-bottom: 140px;
@@ -102,7 +120,7 @@
           <div class="item item-1">
             <div class="img-fill">
                 <div class="text-content">
-                    <h6>ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h6>
+                    <h1>ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h1>
                     <h4>НАДЁЖНЫЕ РЕШЕНИЯ<br>ДЛЯ БЕТОННЫХ СМЕСЕЙ</h4>
                     <p>ХИМКОМ-ЮГ — производитель добавок для бетона. Мы предлагаем решения для повышения прочности, удобоукладываемости и качества бетонных смесей.</p>
                     <a href="{{ url_for('products.list') }}" class="filled-button">Каталог</a>
