@@ -90,6 +90,39 @@
         z-index: 1;
         pointer-events: none;
       }
+      /* Телефон: вместо полного скрытия верхней полосы шаблона — компактная версия:
+         телефон слева, значки мессенджеров справа (email и «Контакты по регионам» остаются в футере) */
+      @media (max-width: 768px) {
+        .sub-header {
+          display: block;
+          height: 40px;
+          line-height: 40px;
+        }
+        .sub-header .row {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .sub-header .col-md-8,
+        .sub-header .col-md-4 {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
+        }
+        .sub-header ul.left-info li {
+          padding: 0 12px;
+        }
+        .sub-header ul.left-info li:nth-child(n+2) {
+          display: none;
+        }
+        .sub-header ul.left-info li:first-child {
+          border-right: 1px solid rgba(250, 250, 250, 0.3);
+        }
+        .sub-header ul.right-icons li {
+          width: 40px;
+        }
+      }
       /* Телефон: анимации включаются тапом (js/touch-play.js), тогда зона не прокручивается */
       .touch-play-active {
         touch-action: none;

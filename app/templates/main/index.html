@@ -23,6 +23,33 @@
       font-size: 18px;
     }
   }
+  /* Телефон лежа: слайд 95vh слишком низкий, текст центрировался и заезжал под логотип.
+     Текст идёт в потоке с отступом сверху под шапку, слайд растёт по содержимому. */
+  @media (max-height: 560px) and (orientation: landscape) {
+    .Modern-Slider .item .img-fill {
+      height: auto;
+      min-height: 95vh;
+      padding: 100px 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .Modern-Slider .text-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+    }
+    .Modern-Slider .item h4 {
+      font-size: 22px;
+      line-height: 28px;
+      margin-bottom: 12px;
+    }
+    .Modern-Slider .item p {
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
+  }
   /* Отступ перед футером (раньше его давал удалённый блок партнёров) */
   .callback-form {
     margin-bottom: 140px;
