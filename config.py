@@ -27,6 +27,9 @@ class Config:
     # Заявки по Краснодарскому краю и Ростовской области
     CONTACT_EMAIL_KRASNODAR = os.environ.get("CONTACT_EMAIL_KRASNODAR", "chimkom-ug@mail.ru")
 
+    # Ссылка на профиль в мессенджере Max (https://max.ru/u/...); пусто — значок не показывается
+    MAX_URL = os.environ.get("MAX_URL", "").strip()
+
     # --- SEO ---
     # Канонический адрес сайта (без слэша в конце): canonical, sitemap, Open Graph
     SITE_URL = os.environ.get("SITE_URL", "https://himkom-ug.ru").rstrip("/")

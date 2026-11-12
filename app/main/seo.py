@@ -58,6 +58,7 @@ def organization_jsonld():
 @bp.app_context_processor
 def seo_context():
     metrika = current_app.config.get("YANDEX_METRIKA_ID", "")
+    max_url = current_app.config.get("MAX_URL", "")
     return {
         "site_url": _site_url(),
         # query-параметры в canonical не попадают
@@ -65,6 +66,8 @@ def seo_context():
         "og_image_url": _site_url() + url_for("static", filename=OG_IMAGE),
         "org_jsonld": organization_jsonld(),
         "metrika_id": metrika if metrika.isdigit() else "",
+        # значок Max — только для ссылки на max.ru (защита от случайной подстановки чужого адреса)
+        "max_url": max_url if max_url.startswith("https://max.ru/") else "",
         "yandex_verification": current_app.config.get("YANDEX_VERIFICATION", ""),
         "google_verification": current_app.config.get("GOOGLE_VERIFICATION", ""),
     }

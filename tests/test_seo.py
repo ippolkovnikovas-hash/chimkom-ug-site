@@ -70,6 +70,19 @@ class SeoTest(unittest.TestCase):
             self.assertRegex(tag, r'width="\d+" height="\d+"')
         self.assertIn("height: auto", html)
 
+    def test_telegram_link_and_max_hidden_by_default(self):
+        for path in ("/", "/about", "/contact", "/products/"):
+            html = self.client.get(path).get_data(as_text=True)
+            self.assertIn('href="https://t.me/+79624238118"', html)
+            self.assertNotIn('title="Max"', html)
+            self.assertNotIn('href="#"', html)
+
+    def test_max_icon_shown_only_for_max_ru_link(self):
+        ok = self.make_client(MAX_URL="https://max.ru/u/abc123")
+        self.assertIn('href="https://max.ru/u/abc123"', ok.get("/").get_data(as_text=True))
+        bad = self.make_client(MAX_URL="https://evil.example/x")
+        self.assertNotIn('title="Max"', bad.get("/").get_data(as_text=True))
+
     def test_canonical_ignores_query_string(self):
         html = self.client.get("/about?utm_source=x").get_data(as_text=True)
         self.assertIn('<link rel="canonical" href="https://example.test/about">', html)
