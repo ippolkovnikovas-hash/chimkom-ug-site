@@ -222,6 +222,9 @@
               <li class="nav-item {% block nav_products %}{% endblock %}">
                 <a class="nav-link" href="{{ url_for('products.list') }}">Каталог</a>
               </li>
+              <li class="nav-item {% block nav_articles %}{% endblock %}">
+                <a class="nav-link" href="{{ url_for('articles.list') }}">Статьи</a>
+              </li>
               <li class="nav-item {% block nav_contact %}{% endblock %}">
                 <a class="nav-link" href="{{ url_for('main.contact') }}">Контакты</a>
               </li>
@@ -266,6 +269,7 @@
               <li><a href="{{ url_for('main.index') }}">Главная</a></li>
               <li><a href="{{ url_for('main.about') }}">О компании</a></li>
               <li><a href="{{ url_for('products.list') }}">Каталог</a></li>
+              <li><a href="{{ url_for('articles.list') }}">Статьи</a></li>
               <li><a href="{{ url_for('main.contact') }}">Контакты</a></li>
             </ul>
           </div>

@@ -10,10 +10,14 @@ SITEMAP_PAGES = [
     ("products.list", "weekly", "0.9"),
     ("main.about", "monthly", "0.7"),
     ("main.contact", "monthly", "0.8"),
+    ("articles.list", "weekly", "0.6"),
 ]
 
 # Страницы продуктов (/products/<slug>) добавляются в sitemap автоматически из app/products/data.py.
 PRODUCT_SITEMAP = ("monthly", "0.8")
+
+# Статьи (/articles/<slug>) добавляются в sitemap автоматически из app/articles/data.py.
+ARTICLE_SITEMAP = ("monthly", "0.6")
 
 # POST-маршруты форм: в выдаче им делать нечего
 ROBOTS_DISALLOW = ["/callback", "/feedback"]
@@ -104,6 +108,38 @@ def product_jsonld(product):
     ]
 
 
+def article_jsonld(article):
+    """Разметка статьи: Article (автор и издатель — организация) и BreadcrumbList."""
+    site = _site_url()
+    url = site + url_for("articles.detail", slug=article["slug"])
+    organization = {"@type": "Organization", "name": "ХИМКОМ-ЮГ", "@id": site + "/#organization"}
+    return [
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": article["title"],
+            "description": article["meta_description"],
+            "url": url,
+            "mainEntityOfPage": url,
+            "image": site + url_for("static", filename=OG_IMAGE),
+            "datePublished": article["published"],
+            "dateModified": article["modified"],
+            "author": organization,
+            "publisher": organization,
+            "inLanguage": "ru",
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Главная", "item": site + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Статьи", "item": site + url_for("articles.list")},
+                {"@type": "ListItem", "position": 3, "name": article["title"], "item": url},
+            ],
+        },
+    ]
+
+
 @bp.app_context_processor
 def seo_context():
     metrika = current_app.config.get("YANDEX_METRIKA_ID", "")
@@ -150,6 +186,18 @@ def sitemap():
         rows.append(
             "  <url>\n"
             f"    <loc>{_site_url()}{url_for('products.detail', slug=product['slug'])}</loc>\n"
+            f"    <changefreq>{changefreq}</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
+            "  </url>"
+        )
+    from app.articles.data import ARTICLES
+
+    for article in ARTICLES:
+        changefreq, priority = ARTICLE_SITEMAP
+        rows.append(
+            "  <url>\n"
+            f"    <loc>{_site_url()}{url_for('articles.detail', slug=article['slug'])}</loc>\n"
+            f"    <lastmod>{article['modified']}</lastmod>\n"
             f"    <changefreq>{changefreq}</changefreq>\n"
             f"    <priority>{priority}</priority>\n"
             "  </url>"

@@ -38,8 +38,10 @@ class SeoTest(unittest.TestCase):
                 "https://example.test/products/",
                 "https://example.test/about",
                 "https://example.test/contact",
+                "https://example.test/articles/",
             ]
-            + [f"https://example.test/products/{slug}" for slug in ("f-1", "f-3", "fp", "aero", "frost-20", "fk-20m")],
+            + [f"https://example.test/products/{slug}" for slug in ("f-1", "f-3", "fp", "aero", "frost-20", "fk-20m")]
+            + ["https://example.test/articles/plastifikator-i-superplastifikator-dlya-betona"],
         )
 
     def sitemap_locs(self):

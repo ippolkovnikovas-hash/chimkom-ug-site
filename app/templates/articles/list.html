@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Статьи о добавках для бетона — ХИМКОМ-ЮГ{% endblock %}
+{% block meta_description %}Статьи о добавках для бетона: как выбрать пластификатор, подобрать дозировку и работать с суперпластификаторами. Разбор от производителя ХИМКОМ-ЮГ.{% endblock %}
+{% block nav_articles %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+  .articles-page { padding-top: 2rem; padding-bottom: 4rem; color: #333; }
+  .article-card { padding: 1.2rem 0; border-bottom: 1px solid #e3e3e3; }
+  .article-card h2 { font-size: 1.3rem; font-weight: 700; margin: 0 0 0.5rem; }
+  .article-card h2 a { color: #2e7d32; }
+  .article-card p { font-size: 1rem; line-height: 1.7; color: #333; margin-bottom: 0.5rem; }
+  .article-card .article-meta { font-size: 0.9rem; opacity: 0.7; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-heading header-text heading-catalog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Статьи о добавках для бетона</h1>
+            <span>Практика применения от производителя</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container articles-page">
+      {% for article in articles %}
+      <div class="article-card">
+        <h2><a href="{{ url_for('articles.detail', slug=article.slug) }}">{{ article.title }}</a></h2>
+        <p class="article-meta">{{ article.published_human }}</p>
+        <p>{{ article.lead }}</p>
+        <p><a href="{{ url_for('articles.detail', slug=article.slug) }}">Читать статью</a></p>
+      </div>
+      {% endfor %}
+    </div>
+
+{% endblock %}

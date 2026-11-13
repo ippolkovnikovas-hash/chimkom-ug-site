@@ -33,14 +33,17 @@ def create_app(config_name=None):
     from app.products import bp as products_bp
     app.register_blueprint(products_bp, url_prefix="/products")
 
+    from app.articles import bp as articles_bp
+    app.register_blueprint(articles_bp, url_prefix="/articles")
+
     @app.before_request
     def strip_trailing_slash():
         """/about/ и /products/f-1/ → 301 на адрес без слэша (дубли для поисковиков).
 
-        Каталог /products/ остаётся со слэшем: это канонический адрес раздела.
+        Каталог /products/ и список статей /articles/ остаются со слэшем: это канонические адреса разделов.
         """
         path = request.path
-        if len(path) > 1 and path.endswith("/") and path != "/products/":
+        if len(path) > 1 and path.endswith("/") and path not in ("/products/", "/articles/"):
             target = path.rstrip("/")
             if request.query_string:
                 target += "?" + request.query_string.decode("utf-8", "replace")
