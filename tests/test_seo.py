@@ -41,7 +41,7 @@ class SeoTest(unittest.TestCase):
                 "https://example.test/articles/",
             ]
             + [f"https://example.test/products/{slug}" for slug in ("f-1", "f-3", "fp", "aero", "frost-20", "fk-20m")]
-            + ["https://example.test/articles/plastifikator-i-superplastifikator-dlya-betona"],
+            + [f"https://example.test/articles/{slug}" for slug in ("plastifikator-i-superplastifikator-dlya-betona", "protivomoroznye-dobavki-dlya-betona")],
         )
 
     def sitemap_locs(self):
