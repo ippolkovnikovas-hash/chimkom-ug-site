@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Согласие на обработку персональных данных — ХИМКОМ-ЮГ{% endblock %}
+{% block meta_description %}Текст согласия на обработку персональных данных, которое вы даёте при отправке форм на сайте himkom-ug.ru: перечень данных, цели, срок и порядок отзыва.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .legal-page { padding-top: 2rem; padding-bottom: 4rem; color: #333; }
+  .legal-page p, .legal-page li { font-size: 1rem; line-height: 1.7; color: #333; }
+  .legal-page p { margin-bottom: 0.8rem; }
+  .legal-page ul { list-style: disc; padding-left: 1.3rem; margin-bottom: 0.8rem; }
+  .legal-page a { color: #2e7d32; text-decoration: underline !important; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-heading header-text heading-catalog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Согласие на обработку персональных данных</h1>
+            <span>Форма обратной связи на сайте himkom-ug.ru</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container legal-page">
+      {% if operator.updated %}<p><em>Редакция от {{ operator.updated }}</em></p>{% endif %}
+
+      <p>Отправляя форму на сайте himkom-ug.ru и отмечая пункт о согласии, я свободно, своей волей и в своём интересе даю согласие оператору — {{ operator.name }}{% if operator.inn %}, ИНН {{ operator.inn }}{% endif %}{% if operator.ogrn %}, ОГРН {{ operator.ogrn }}{% endif %}{% if operator.address %}, адрес: {{ operator.address }}{% endif %} — на обработку моих персональных данных на следующих условиях.</p>
+
+      <p><strong>Перечень данных:</strong> имя; номер телефона; адрес электронной почты; регион; текст сообщения — в том объёме, в каком я указал их в форме.</p>
+
+      <p><strong>Цели обработки:</strong> связаться со мной по моему обращению, перезвонить, ответить на вопросы, подготовить консультацию и коммерческое предложение по продукции оператора.</p>
+
+      <p><strong>Действия с данными:</strong> сбор, запись, систематизация, накопление, хранение, уточнение, использование, передача сотрудникам оператора и используемому им почтовому сервису в целях получения обращения, блокирование, удаление.</p>
+
+      <p><strong>Срок согласия:</strong> до достижения целей обработки либо до его отзыва.</p>
+
+      <p><strong>Отзыв согласия:</strong> я могу отозвать согласие, направив обращение на адрес <a href="mailto:chimkom-ug@mail.ru?subject=Персональные%20данные">chimkom-ug@mail.ru</a> с темой «Персональные данные». После отзыва оператор прекращает обработку и удаляет данные, если иное не требуется законом.</p>
+
+      <p>Подробнее об обработке данных, файлах cookie и моих правах — в <a href="{{ url_for('main.privacy') }}">Политике конфиденциальности</a>.</p>
+
+      <p style="margin-top:2rem;"><a href="{{ url_for('main.index') }}">← На главную</a></p>
+    </div>
+{% endblock %}
