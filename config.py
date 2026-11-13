@@ -39,6 +39,10 @@ class Config:
     YANDEX_VERIFICATION = os.environ.get("YANDEX_VERIFICATION", "").strip()
     GOOGLE_VERIFICATION = os.environ.get("GOOGLE_VERIFICATION", "").strip()
 
+    # Срок HSTS в секундах (заголовок Strict-Transport-Security); 0 — выключен.
+    # Включать после проверки https и редиректов: 86400 (сутки) → 2592000 (30 дней) → 31536000 (год)
+    HSTS_MAX_AGE = os.environ.get("HSTS_MAX_AGE", "0").strip()
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

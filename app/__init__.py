@@ -15,6 +15,10 @@ def create_app(config_name=None):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
+    # --- Заголовки безопасности (nosniff, X-Frame-Options, Referrer-Policy, HSTS по настройке) ---
+    from app.security_headers import init_security_headers
+    init_security_headers(app)
+
     # --- Расширения ---
     mail.init_app(app)
 
