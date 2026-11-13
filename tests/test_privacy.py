@@ -54,8 +54,9 @@ class PrivacyEnabledTest(unittest.TestCase):
 
     def test_policy_covers_required_topics(self):
         html = self.c.get("/privacy").get_data(as_text=True)
-        for fragment in ("152-ФЗ", "Яндекс.Метрика", "Google Fonts", "_ym_", 'id="cookie"', "отозвать согласие", "Роскомнадзор", "chimkom-ug@mail.ru"):
+        for fragment in ("152-ФЗ", "Яндекс.Метрика", "Mail.ru", "_ym_", 'id="cookie"', "отозвать согласие", "Роскомнадзор", "chimkom-ug@mail.ru"):
             self.assertIn(fragment, html)
+        self.assertNotIn("Google Fonts", html)  # шрифты переехали на сайт (feat/local-fonts)
         self.assertNotIn("TODO", html)
 
     def test_consent_structure(self):
