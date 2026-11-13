@@ -97,6 +97,18 @@ class SeoTest(unittest.TestCase):
         self.assertEqual(data["name"], "ХИМКОМ-ЮГ")
         self.assertEqual(data["url"], "https://example.test/")
 
+    def test_hasavyurt_address_on_contact_page_and_in_jsonld(self):
+        html = self.client.get("/contact").get_data(as_text=True)
+        self.assertIn("г. Хасавюрт, ул. Новогрозненская, 56", html)
+        self.assertIn("+7-929-788-77-77", html)
+        raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
+        office = json.loads(raw)["subOrganization"][0]
+        self.assertEqual(office["address"]["addressLocality"], "Хасавюрт")
+        self.assertEqual(office["address"]["streetAddress"], "ул. Новогрозненская, 56")
+        self.assertEqual(office["telephone"], "+7-929-788-77-77")
+        # в карточках контактов адрес один (у Дагестана)
+        self.assertEqual(html.count('class="contact-address"'), 1)
+
     def test_metrika_and_verification_off_by_default(self):
         html = self.client.get("/").get_data(as_text=True)
         self.assertNotIn("mc.yandex.ru", html)

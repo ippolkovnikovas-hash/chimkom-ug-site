@@ -47,6 +47,12 @@
   .contact-information .contact-role-under {
     margin-top: 0.2rem;
   }
+  .contact-information .contact-address {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
   .contact-information .contact-role {
     font-size: 0.95rem;
     color: #555;
@@ -153,6 +159,7 @@
                 {{ person.name }}
                 {% endif %}
               </p>
+              {% if key in office_addresses %}<p class="contact-address">{{ office_addresses[key] }}</p>{% endif %}
               <a href="tel:+{{ person.phone }}">{{ person.phone | phone }}</a><br>
               <a href="https://wa.me/{{ person.phone }}" target="_blank">WhatsApp</a>
           {% endcall %}
