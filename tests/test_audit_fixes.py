@@ -50,6 +50,7 @@ class AuditFixesTest(unittest.TestCase):
     def test_unused_jquery_ui_not_loaded(self):
         html = self.client.get("/").get_data(as_text=True)
         self.assertNotIn("accordions.js", html)
+        self.assertFalse(os.path.exists(os.path.join(STATIC_JS, "accordions.js")))
         with open(os.path.join(STATIC_JS, "custom.js"), encoding="utf-8") as f:
             self.assertNotIn(".tabs(", f.read())
 
