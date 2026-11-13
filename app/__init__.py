@@ -22,6 +22,10 @@ def create_app(config_name=None):
     # --- Расширения ---
     mail.init_app(app)
 
+    # --- Кэш статики и версия в адресах файлов ---
+    from app.static_cache import init_static_cache
+    init_static_cache(app)
+
     # --- Регистрация blueprints ---
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
