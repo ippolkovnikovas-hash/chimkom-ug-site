@@ -58,6 +58,15 @@ class PrivacyEnabledTest(unittest.TestCase):
             self.assertIn(fragment, html)
         self.assertNotIn("TODO", html)
 
+    def test_consent_structure(self):
+        """Согласие — нумерованные пункты + таблица условий (структура по образцу legal/sopd.pdf)."""
+        html = self.c.get("/consent").get_data(as_text=True)
+        for fragment in ("Цель обработки", "Категория субъектов", "Порядок уничтожения",
+                         "Яндекс.Метрика", "Mail.ru", "отозвать согласие",
+                         "Политикой в отношении обработки персональных данных", "cookie"):
+            self.assertIn(fragment, html, fragment)
+        self.assertEqual(len(re.findall(r"<table", html)), 1)
+
     def test_banner_and_link_on_pages(self):
         for path in ("/", "/contact", "/about"):
             html = self.c.get(path).get_data(as_text=True)
