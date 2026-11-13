@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}{{ product.meta_title }}{% endblock %}
+{% block meta_description %}{{ product.meta_description }}{% endblock %}
+{% block nav_products %}active{% endblock %}
+
+{% block head_extra %}
+    {% for block in jsonld %}<script type="application/ld+json">{{ block | tojson }}</script>
+    {% endfor %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .product-page { padding: 2rem 0 4rem; color: #333; line-height: 1.6; }
+  .product-crumbs { font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.85; }
+  .product-crumbs a { text-decoration: underline; }
+  .product-lead { font-size: 1.15rem; margin-bottom: 1rem; }
+  .product-page p { margin-bottom: 0.8rem; }
+  .spec-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 1.8rem 0 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .green-theme .spec-title { color: #2e7d32; }
+  .blue-theme .spec-title { color: #1565C0; }
+  .spec-list { list-style: disc; padding-left: 1.3rem; margin-bottom: 0.8rem; }
+  .spec-list li { margin-bottom: 0.4rem; }
+  .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 0.8rem; }
+  .spec-table th, .spec-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e3e3e3; vertical-align: top; text-align: left; }
+  .spec-table th { font-weight: 600; width: 40%; }
+  .sheet-link { display: inline-block; font-weight: 600; text-decoration: underline; }
+  .green-theme .sheet-link, .green-theme .product-page a.inline { color: #2e7d32; }
+  .blue-theme .sheet-link, .blue-theme .product-page a.inline { color: #1565C0; }
+  .order-box {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    background: #f7f7f7;
+    border: 2px solid #e9ecef;
+  }
+  .order-box p { margin-bottom: 0.4rem; }
+  .related-list { list-style: none; padding: 0; margin: 0; }
+  .related-list li { margin-bottom: 0.4rem; }
+
+  /* Лайтбокс технического листа */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 92%; max-height: 90vh; border-radius: 8px; box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+  .lightbox-close { position: absolute; top: 1rem; right: 1.5rem; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-heading header-text heading-catalog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>{{ product.name }} — {{ product.subtitle | lower }}</h1>
+            <span>{{ product.category_title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container product-page {{ product.theme }}">
+
+      <nav class="product-crumbs" aria-label="Навигация">
+        <a href="{{ url_for('main.index') }}">Главная</a> /
+        <a href="{{ url_for('products.list') }}">Каталог</a> /
+        {{ product.name }}
+      </nav>
+
+      {% for section in product.sections %}
+      <h2 class="spec-title">{{ section.title }}</h2>
+      {% if section.bullets %}
+      <ul class="spec-list">
+        {% for item in section.bullets %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% for paragraph in section.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+      {% endfor %}
+
+      <h2 class="spec-title">Технические характеристики</h2>
+      <table class="spec-table">
+        {% for name, value in product.props %}
+        <tr><th scope="row">{{ name }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
+      </table>
+
+      {% if product.dosage_table %}
+      <h2 class="spec-title">Рекомендуемый диапазон дозировок</h2>
+      <table class="spec-table">
+        <tr><th scope="col">Средняя расчетная температура твердения бетона</th><th scope="col">Дозировка добавки по готовому продукту, в % от массы цемента</th></tr>
+        {% for temp, dose in product.dosage_table %}
+        <tr><td>{{ temp }}</td><td>{{ dose }}</td></tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+
+      <p>
+        <a class="sheet-link" href="{{ url_for('static', filename=product.image) }}" target="_blank" rel="noopener" onclick="return openSheet(event, this)"><i class="fa fa-file-image-o"></i> Открыть технический лист (JPG)</a>
+      </p>
+
+      <div class="order-box">
+        <h2 class="spec-title" style="margin-top:0;">Как заказать</h2>
+        <p>Цена — по запросу. Подбор дозировки и технологическая консультация — по телефону.</p>
+        <p><strong>Краснодар:</strong> <a class="inline" href="tel:+79528684567">+7-952-868-45-67</a> · <a class="inline" href="https://wa.me/79528684567" target="_blank" rel="noopener">WhatsApp</a></p>
+        <p><strong>Республики Северного Кавказа:</strong> <a class="inline" href="tel:+79624238118">+7-962-423-81-18</a> · <a class="inline" href="https://wa.me/79624238118" target="_blank" rel="noopener">WhatsApp</a></p>
+        <p><a class="inline" href="{{ url_for('main.contact') }}">Все контакты и форма заявки</a></p>
+      </div>
+
+      <h2 class="spec-title">Другие добавки</h2>
+      <ul class="related-list">
+        {% for item in related %}
+        <li><a class="inline" href="{{ url_for('products.detail', slug=item.slug) }}">{{ item.name }}</a> — {{ item.subtitle | lower }}</li>
+        {% endfor %}
+      </ul>
+      <p style="margin-top:1rem;"><a class="inline" href="{{ url_for('products.list') }}">← Весь каталог</a></p>
+
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close">&times;</span>
+      <img src="" alt="Технический лист {{ product.alt }}">
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openSheet(e, link) {
+  var lb = document.getElementById('lightbox');
+  lb.querySelector('img').src = link.href;
+  lb.classList.add('open');
+  return false; // отменить переход по ссылке
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+{% endblock %}

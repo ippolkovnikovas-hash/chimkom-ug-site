@@ -38,12 +38,19 @@ class SeoTest(unittest.TestCase):
                 "https://example.test/products/",
                 "https://example.test/about",
                 "https://example.test/contact",
-            ],
+            ]
+            + [f"https://example.test/products/{slug}" for slug in ("f-1", "f-3", "fp", "aero", "frost-20", "fk-20m")],
         )
+
+    def sitemap_locs(self):
+        ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        root = ET.fromstring(self.client.get("/sitemap.xml").data)
+        return [e.text for e in root.findall("s:url/s:loc", ns)]
 
     def test_every_sitemap_page_is_ok_and_has_own_meta(self):
         titles, descriptions = set(), set()
-        for path in ("/", "/products/", "/about", "/contact"):
+        paths = [loc.replace("https://example.test", "") for loc in self.sitemap_locs()]
+        for path in paths:
             resp = self.client.get(path)
             self.assertEqual(resp.status_code, 200, path)
             html = resp.get_data(as_text=True)
@@ -51,21 +58,22 @@ class SeoTest(unittest.TestCase):
             self.assertIn(f'<meta property="og:url" content="https://example.test{path}">', html)
             titles.add(re.search(r"<title>(.*?)</title>", html).group(1))
             descriptions.add(re.search(r'<meta name="description" content="(.*?)">', html).group(1))
-        self.assertEqual(len(titles), 4, "у страниц должны быть разные title")
-        self.assertEqual(len(descriptions), 4, "у страниц должны быть разные description")
+        self.assertEqual(len(titles), len(paths), "у страниц должны быть разные title")
+        self.assertEqual(len(descriptions), len(paths), "у страниц должны быть разные description")
 
     def test_each_page_has_exactly_one_h1(self):
-        for path in ("/", "/products/", "/about", "/contact"):
+        for loc in self.sitemap_locs():
+            path = loc.replace("https://example.test", "")
             html = self.client.get(path).get_data(as_text=True)
             self.assertEqual(len(re.findall(r"<h1[ >]", html)), 1, path)
         html = self.client.get("/").get_data(as_text=True)
         self.assertIn("ПРОИЗВОДСТВО ДОБАВОК ДЛЯ БЕТОНА</h1>", html)
 
     def test_product_sheets_are_links_not_inline_images(self):
-        html = self.client.get("/products/").get_data(as_text=True)
-        self.assertNotIn("product-img", html)
-        links = re.findall(r'<a class="sheet-link" href="/static/images/products/[^"]+\.jpg"', html)
-        self.assertEqual(len(links), 6)
+        for slug in ("f-1", "frost-20"):
+            html = self.client.get(f"/products/{slug}").get_data(as_text=True)
+            self.assertNotIn("product-img", html)
+            self.assertRegex(html, r'<a class="sheet-link" href="/static/images/products/[^"]+\.jpg"')
 
     def test_telegram_link_and_max_hidden_by_default(self):
         for path in ("/", "/about", "/contact", "/products/"):
