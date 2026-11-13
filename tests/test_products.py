@@ -103,6 +103,18 @@ class ProductPagesTest(unittest.TestCase):
             self.assertNotIn("aggregateRating", item)
             self.assertEqual([i["position"] for i in blocks[2]["itemListElement"]], [1, 2, 3])
 
+    def test_certificate_block_on_every_product(self):
+        for product in PRODUCTS:
+            html = self.pages[product["slug"]]
+            self.assertEqual(html.count("Сертификат соответствия</h2>"), 1, product["slug"])
+            for fragment in ("РОСС RU.НВ78.Н09847", "с 12.10.2026 по 11.10.2029", "ТУ 24.66.47-001-54362415-2026", "ТН ВЭД 3824400000"):
+                self.assertIn(fragment, html, product["slug"])
+            self.assertNotIn("ПРОГРЕСС", html)  # изготовитель из сертификата в текст сайта не выводим
+            self.assertRegex(html, r'href="/static/images/certificates/sertifikat-sootvetstviya\.jpg')
+            self.assertIn("с белыми цементами не применять", html)
+            self.assertIn("еврокубы", html)
+        self.assertTrue(os.path.isfile(os.path.join(STATIC, "images", "certificates", "sertifikat-sootvetstviya.jpg")))
+
     def test_order_block_and_links(self):
         for product in PRODUCTS:
             html = self.pages[product["slug"]]
