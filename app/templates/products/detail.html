@@ -100,6 +100,9 @@
         {% for name, value in product.props %}
         <tr><th scope="row">{{ name }}</th><td>{{ value }}</td></tr>
         {% endfor %}
+        {% for name, value in common_props %}
+        <tr><th scope="row">{{ name }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
       </table>
 
       {% if product.dosage_table %}
@@ -119,6 +122,9 @@
         <tr><th scope="row">{{ name }}</th><td>{{ value }}</td></tr>
         {% endfor %}
       </table>
+      <p>
+        <a class="sheet-link" href="{{ url_for('static', filename=certificate_image) }}" target="_blank" rel="noopener" onclick="return openSheet(event, this)"><i class="fa fa-file-image-o"></i> Открыть сертификат (JPG)</a>
+      </p>
 
       <p>
         <a class="sheet-link" href="{{ url_for('static', filename=product.image) }}" target="_blank" rel="noopener" onclick="return openSheet(event, this)"><i class="fa fa-file-image-o"></i> Открыть технический лист (JPG)</a>
