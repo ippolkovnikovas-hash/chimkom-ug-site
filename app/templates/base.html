@@ -27,6 +27,7 @@
     <meta property="og:image" content="{{ og_image_url }}">
 
     <script type="application/ld+json">{{ org_jsonld | tojson }}</script>
+    {% block head_extra %}{% endblock %}
 
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo-clear.png') }}">
 

@@ -12,6 +12,9 @@ SITEMAP_PAGES = [
     ("main.contact", "monthly", "0.8"),
 ]
 
+# Страницы продуктов (/products/<slug>) добавляются в sitemap автоматически из app/products/data.py.
+PRODUCT_SITEMAP = ("monthly", "0.8")
+
 # POST-маршруты форм: в выдаче им делать нечего
 ROBOTS_DISALLOW = ["/callback", "/feedback"]
 
@@ -70,6 +73,37 @@ def organization_jsonld():
     }
 
 
+def product_jsonld(product):
+    """Разметка страницы продукта: Product (без цены — «по запросу») и BreadcrumbList.
+
+    Только данные из технических листов; offers/sku/рейтинг не выдумываем.
+    """
+    site = _site_url()
+    url = site + url_for("products.detail", slug=product["slug"])
+    return [
+        {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": product["name"],
+            "description": product["meta_description"],
+            "url": url,
+            "image": site + url_for("static", filename=product["image"]),
+            "category": product["category_title"],
+            "brand": {"@type": "Brand", "name": "ХИМКОМ"},
+            "manufacturer": {"@id": site + "/#organization"},
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Главная", "item": site + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Каталог", "item": site + url_for("products.list")},
+                {"@type": "ListItem", "position": 3, "name": product["name"], "item": url},
+            ],
+        },
+    ]
+
+
 @bp.app_context_processor
 def seo_context():
     metrika = current_app.config.get("YANDEX_METRIKA_ID", "")
@@ -105,6 +139,17 @@ def sitemap():
         rows.append(
             "  <url>\n"
             f"    <loc>{_site_url()}{url_for(endpoint)}</loc>\n"
+            f"    <changefreq>{changefreq}</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
+            "  </url>"
+        )
+    from app.products.data import PRODUCTS  # здесь, а не вверху: products.routes сам импортирует seo
+
+    for product in PRODUCTS:
+        changefreq, priority = PRODUCT_SITEMAP
+        rows.append(
+            "  <url>\n"
+            f"    <loc>{_site_url()}{url_for('products.detail', slug=product['slug'])}</loc>\n"
             f"    <changefreq>{changefreq}</changefreq>\n"
             f"    <priority>{priority}</priority>\n"
             "  </url>"
