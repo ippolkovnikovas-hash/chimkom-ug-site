@@ -10,7 +10,10 @@
 
 {% block extra_css %}
 <style>
-  .product-page { padding: 2rem 0 4rem; color: #333; line-height: 1.6; }
+  /* только вертикальные отступы: боковые даёт .container (иначе на телефоне текст прижат к краю) */
+  .product-page { padding-top: 2rem; padding-bottom: 4rem; color: #333; }
+  /* шаблон задаёт p серым с line-height 30px, а у li свой размер — выравниваем текст страницы */
+  .product-page p, .product-page li, .product-page td, .product-page th { font-size: 1rem; line-height: 1.7; color: #333; }
   .product-crumbs { font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.85; }
   .product-crumbs a { text-decoration: underline; }
   .product-lead { font-size: 1.15rem; margin-bottom: 1rem; }

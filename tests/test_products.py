@@ -111,6 +111,16 @@ class ProductPagesTest(unittest.TestCase):
                 if other["slug"] != product["slug"]:
                     self.assertIn(f'href="/products/{other["slug"]}"', html)
 
+    def test_container_keeps_side_padding_on_mobile(self):
+        # padding: Npx 0 на .container обнуляет боковые отступы Bootstrap — текст прижимается к краю экрана
+        for html in list(self.pages.values()) + [self.client.get("/products/").get_data(as_text=True)]:
+            self.assertNotRegex(html, r"padding:\s*[\d.]+rem 0 [\d.]+rem")
+            self.assertNotRegex(html, r"\.product-page \{[^}]*padding:\s*[\d.]+rem 0")
+
+    def test_text_typography_unified(self):
+        css = self.pages["f-3"]
+        self.assertIn(".product-page p, .product-page li", css)
+
     def test_same_category_listed_first_in_related(self):
         html = self.pages["frost-20"]
         self.assertLess(html.index('href="/products/fk-20m"'), html.index('href="/products/f-1"'))
