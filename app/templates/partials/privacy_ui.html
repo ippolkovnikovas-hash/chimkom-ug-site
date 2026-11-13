@@ -1,0 +1,40 @@
+{# Баннер cookie и стили галочки согласия. Подключается в base.html только при PRIVACY_ENABLED. #}
+<style>
+  .consent-check label { display: flex; gap: 0.5rem; align-items: flex-start; text-align: left; font-size: 0.8rem; line-height: 1.4; font-weight: 400; margin: 0.3rem 0 0.8rem; cursor: pointer; }
+  .consent-check input { flex: none; margin-top: 0.15rem; width: auto; }
+  .consent-check a { text-decoration: underline !important; }
+  #cookie-notice {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 99999;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.3);
+  }
+  #cookie-notice .cookie-inner { max-width: 1140px; margin: 0 auto; display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
+  #cookie-notice p { color: #fff; font-size: 0.85rem; line-height: 1.45; margin: 0; }
+  #cookie-notice a { color: #8bd36b; text-decoration: underline !important; }
+  #cookie-notice button { flex: none; border: 0; border-radius: 6px; background: #5fc935; color: #111; font-weight: 600; padding: 0.55rem 1.2rem; cursor: pointer; }
+  @media (max-width: 576px) {
+    #cookie-notice .cookie-inner { flex-direction: column; align-items: stretch; text-align: left; }
+  }
+</style>
+<div id="cookie-notice" role="region" aria-label="Файлы cookie">
+  <div class="cookie-inner">
+    <p>Сайт использует файлы cookie, в том числе сервис «Яндекс.Метрика», чтобы считать посещаемость и улучшать работу сайта. Продолжая пользоваться сайтом, вы соглашаетесь с этим. Подробнее — в <a href="{{ url_for('main.privacy') }}#cookie">Политике конфиденциальности</a>.</p>
+    <button type="button" id="cookie-notice-ok">Понятно</button>
+  </div>
+</div>
+<script>
+(function () {
+  var key = "cookie_notice_ok", box = document.getElementById("cookie-notice");
+  try { if (window.localStorage.getItem(key)) return; } catch (e) {}
+  box.style.display = "block";
+  document.getElementById("cookie-notice-ok").addEventListener("click", function () {
+    try { window.localStorage.setItem(key, "1"); } catch (e) {}
+    box.style.display = "none";
+  });
+})();
+</script>

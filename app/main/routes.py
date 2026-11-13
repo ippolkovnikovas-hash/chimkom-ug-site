@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, flash, session, c
 from flask_mail import Message
 
 from app.main import bp
+from app.main.privacy import consent_given
 from app import mail
 from app.main.people import PEOPLE, TEAM, TEAM_PEOPLE, REPUBLICS, OFFICE_ADDRESSES, format_phone
 
@@ -39,6 +40,10 @@ def contact():
         phone = request.form.get("phone", "").strip()
         message = request.form.get("message", "").strip()
         region = request.form.get("region", "")
+
+        if not consent_given():
+            flash("Для отправки отметьте согласие на обработку персональных данных.", "error")
+            return redirect(url_for("main.contact"))
 
         if not name or not email or not message or region not in CONTACT_REGIONS:
             flash("Заполните все обязательные поля.", "error")
@@ -82,6 +87,10 @@ def feedback():
     email = request.form.get("email", "").strip()
     message = request.form.get("message", "").strip()
 
+    if not consent_given():
+        flash("Для отправки отметьте согласие на обработку персональных данных.", "error")
+        return redirect(request.referrer or url_for("main.index"))
+
     if not name or not email or not message:
         flash("Заполните все поля.", "error")
         return redirect(request.referrer or url_for("main.index"))
@@ -109,6 +118,10 @@ def callback():
     """Заказ обратного звонка (имя + телефон, без email)."""
     name = request.form.get("name", "").strip()
     phone = request.form.get("phone", "").strip()
+
+    if not consent_given():
+        flash("Для отправки отметьте согласие на обработку персональных данных.", "error")
+        return redirect(request.referrer or url_for("main.index"))
 
     if not name or not phone:
         flash("Укажите имя и телефон.", "error")

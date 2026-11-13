@@ -303,6 +303,7 @@
                       <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение" required=""></textarea>
                     </fieldset>
                   </div>
+                  {% with consent_id='footer' %}{% include "partials/consent.html" %}{% endwith %}
                   <div class="col-lg-12">
                     <fieldset>
                       <button type="submit" id="form-submit" class="filled-button">Отправить</button>
@@ -320,7 +321,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <p>Copyright &copy; 2026 ООО «Химком-ЮГ». Все права защищены.</p>
+            <p>Copyright &copy; 2026 ООО «Химком-ЮГ». Все права защищены.{% if privacy_enabled %} · <a href="{{ url_for('main.privacy') }}" style="text-decoration: underline !important;">Политика конфиденциальности</a>{% endif %}</p>
           </div>
         </div>
       </div>
@@ -338,6 +339,8 @@
     <script src="{{ url_for('static', filename='js/molecules.js') }}"></script>
 
     {% block extra_js %}{% endblock %}
+
+    {% if privacy_enabled %}{% include "partials/privacy_ui.html" %}{% endif %}
 
     {% if metrika_id %}
     <!-- Яндекс.Метрика (вебвизор выключен: на сайте есть формы с персональными данными) -->

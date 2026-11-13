@@ -1,0 +1,11 @@
+{# Галочка согласия на обработку ПД в форме. Использовать: {% with consent_id='contact' %}{% include "partials/consent.html" %}{% endwith %} #}
+{% if privacy_enabled %}
+<div class="col-lg-12">
+  <fieldset class="consent-check">
+    <label for="consent-{{ consent_id }}">
+      <input type="checkbox" name="consent" value="1" id="consent-{{ consent_id }}" required>
+      <span>Я даю <a href="{{ url_for('main.consent') }}" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и ознакомился с <a href="{{ url_for('main.privacy') }}" target="_blank" rel="noopener">Политикой конфиденциальности</a></span>
+    </label>
+  </fieldset>
+</div>
+{% endif %}

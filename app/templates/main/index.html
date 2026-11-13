@@ -368,6 +368,7 @@
                                         <button type="submit" id="callback-submit" class="border-button">Заказать звонок</button>
                                     </fieldset>
                                 </div>
+                                {% with consent_id='callback' %}{% include "partials/consent.html" %}{% endwith %}
                             </div>
                         </form>
                     </div>

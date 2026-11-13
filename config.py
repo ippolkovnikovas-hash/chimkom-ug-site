@@ -43,6 +43,16 @@ class Config:
     # Включать после проверки https и редиректов: 86400 (сутки) → 2592000 (30 дней) → 31536000 (год)
     HSTS_MAX_AGE = os.environ.get("HSTS_MAX_AGE", "0").strip()
 
+    # --- Персональные данные (152-ФЗ): политика, согласие, баннер cookie ---
+    # Пока 0/пусто — страницы /privacy и /consent отдают 404, баннера и галочек согласия в формах нет.
+    # Включать после проверки текстов и заполнения реквизитов (см. docs/legal/privacy-notes.md).
+    PRIVACY_ENABLED = os.environ.get("PRIVACY_ENABLED", "").strip().lower() in ("1", "true", "yes", "on")
+    OPERATOR_NAME = os.environ.get("OPERATOR_NAME", "Общество с ограниченной ответственностью «Химком-ЮГ»").strip()
+    OPERATOR_INN = os.environ.get("OPERATOR_INN", "").strip()
+    OPERATOR_OGRN = os.environ.get("OPERATOR_OGRN", "").strip()
+    OPERATOR_ADDRESS = os.environ.get("OPERATOR_ADDRESS", "").strip()  # юридический адрес
+    PRIVACY_UPDATED = os.environ.get("PRIVACY_UPDATED", "").strip()  # дата редакции, напр. «13 ноября 2026 г.»
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Согласие на обработку персональных данных — ХИМКОМ-ЮГ{% endblock %}
+{% block meta_description %}Текст согласия на обработку персональных данных, которое вы даёте при отправке форм на сайте himkom-ug.ru: цели и сроки обработки, передача по поручению оператора, порядок отзыва.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .legal-page { padding-top: 2rem; padding-bottom: 4rem; color: #333; }
+  .legal-page p, .legal-page li, .legal-page td, .legal-page th { font-size: 1rem; line-height: 1.7; color: #333; }
+  .legal-page p { margin-bottom: 0.8rem; }
+  .legal-page ol { padding-left: 1.4rem; margin-bottom: 0.8rem; }
+  .legal-page ol > li { margin-bottom: 0.8rem; }
+  .legal-page ol ol { list-style: none; padding-left: 0.5rem; margin-top: 0.4rem; }
+  .legal-page ol ol > li { margin-bottom: 0.4rem; }
+  .legal-page table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 0.8rem; }
+  .legal-page th, .legal-page td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e3e3e3; vertical-align: top; text-align: left; }
+  .legal-page th { background: #f5f5f5; }
+  .legal-page sup a { text-decoration: none !important; }
+  .legal-table-wrap { overflow-x: auto; }
+  .legal-page a { color: #2e7d32; text-decoration: underline !important; }
+  .legal-page .footnote { font-size: 0.85rem; color: #666; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-heading header-text heading-catalog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Согласие на обработку персональныхных данных</h1>
+            <span>Форма обратной связи на сайте himkom-ug.ru</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container legal-page">
+      {% if operator.updated %}<p><em>Редакция от {{ operator.updated }}</em></p>{% endif %}
+
+      <ol>
+        <li>Отправляя форму на сайте <strong>himkom-ug.ru</strong> и отмечая пункт о согласии, я свободно, своей волей и в своём интересе даю согласие оператору персональных данных (далее — Оператор) на обработку моих персональных данных.</li>
+
+        <li>Оператор персональных данных: {{ operator.name }}{% if operator.inn %}, ИНН {{ operator.inn }}{% endif %}{% if operator.ogrn %}, ОГРН {{ operator.ogrn }}{% endif %}{% if operator.address %}, адрес: {{ operator.address }}{% endif %}.</li>
+
+        <li>Я даю Оператору согласие на обработку персональных данных на следующих условиях:
+          <div class="legal-table-wrap">
+            <table>
+              <tr><th scope="col">Цель обработки</th><th scope="col">Категория субъектов</th><th scope="col">Персональные данные</th><th scope="col">Срок обработки</th><th scope="col">Порядок уничтожения</th></tr>
+              <tr>
+                <td>обработка обращения, отправленного через форму на сайте: связь со мной, консультация и коммерческое предложение по продукции Оператора</td>
+                <td>пользователь сайта, заполнивший форму</td>
+                <td>имя; номер телефона; адрес электронной почты; регион; текст сообщения — в том объёме, в каком я указал их в форме</td>
+                <td>до достижения целей обработки либо до отзыва согласия</td>
+                <td>удаление без возможности восстановления</td>
+              </tr>
+              <tr>
+                <td>обеспечение работоспособности сайта и проведение аналитических исследований</td>
+                <td>пользователь сайта</td>
+                <td>метаданные, включая IP-адрес и cookie-файлы<sup><a href="#cookie-fn">[1]</a></sup></td>
+                <td>до прекращения работы сайта</td>
+                <td>удаление из базы данных без возможности восстановления</td>
+              </tr>
+            </table>
+          </div>
+        </li>
+
+        <li>Оператор обрабатывает персональные данные в соответствии с <a href="{{ url_for('main.privacy') }}">Политикой в отношении обработки персональных данных</a>.</li>
+
+        <li>Я даю согласие на передачу моих персональных данных по поручению Оператора:
+          <ol>
+            <li>почтовому сервису Mail.ru — для получения и обработки моего обращения на электронной почте Оператора;</li>
+            <li>правообладателю сервиса «Яндекс.Метрика» ООО «Яндекс» — для сбора и анализа статистической информации о моих действиях на сайте.</li>
+          </ol>
+        </li>
+
+        <li>Я в любое время вправе отозвать согласие, направив Оператору обращение на адрес <a href="mailto:chimkom-ug@mail.ru?subject=Персональные%20данные">chimkom-ug@mail.ru</a> с темой «Персональные данные». После отзыва Оператор прекращает обработку и удаляет мои персональные данные, если иное не требуется законом.</li>
+      </ol>
+
+      <p class="footnote" id="cookie-fn">[1] Файлы «cookie» — небольшие текстовые файлы, которые сохраняются в браузере при посещении сайта и используются для его работы и подсчёта посещаемости. Подробнее — в <a href="{{ url_for('main.privacy') }}#cookie">разделе «Файлы cookie» Политики</a>.</p>
+
+      <p style="margin-top:2rem;"><a href="{{ url_for('main.index') }}">← На главную</a></p>
+    </div>
+{% endblock %}
