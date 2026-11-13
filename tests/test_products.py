@@ -79,7 +79,10 @@ class ProductPagesTest(unittest.TestCase):
     def test_sheet_file_exists_and_linked(self):
         for product in PRODUCTS:
             self.assertTrue(os.path.isfile(os.path.join(STATIC, product["image"])), product["image"])
-            self.assertIn(f'href="/static/{product["image"]}"', self.pages[product["slug"]])
+            self.assertRegex(
+                self.pages[product["slug"]],
+                rf'href="/static/{re.escape(product["image"])}(\?v=[0-9a-f]{{10}})?"',
+            )
 
     def test_sheet_lightbox_above_header(self):
         # лайтбокс листа обязан открываться поверх шапки (sub-header z-index 9999999, header 99999)

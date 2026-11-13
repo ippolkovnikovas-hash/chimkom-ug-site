@@ -73,7 +73,7 @@ class SeoTest(unittest.TestCase):
         for slug in ("f-1", "frost-20"):
             html = self.client.get(f"/products/{slug}").get_data(as_text=True)
             self.assertNotIn("product-img", html)
-            self.assertRegex(html, r'<a class="sheet-link" href="/static/images/products/[^"]+\.jpg"')
+            self.assertRegex(html, r'<a class="sheet-link" href="/static/images/products/[^"?]+\.jpg(\?v=[0-9a-f]{10})?"')
 
     def test_telegram_link_and_max_hidden_by_default(self):
         for path in ("/", "/about", "/contact", "/products/"):
