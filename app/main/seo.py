@@ -1,5 +1,5 @@
 """SEO: robots.txt, sitemap.xml и общие данные для мета-тегов (canonical, Open Graph, JSON-LD)."""
-from flask import Response, current_app, request, url_for
+from flask import Response, current_app, request, session, url_for
 
 from app.main import bp
 
@@ -85,6 +85,8 @@ def seo_context():
         "max_url": max_url if max_url.startswith("https://max.ru/") else "",
         "yandex_verification": current_app.config.get("YANDEX_VERIFICATION", ""),
         "google_verification": current_app.config.get("GOOGLE_VERIFICATION", ""),
+        # одноразовая цель Метрики после успешной отправки формы (записывается в маршрутах форм)
+        "metrika_goal": session.pop("metrika_goal", ""),
     }
 
 
