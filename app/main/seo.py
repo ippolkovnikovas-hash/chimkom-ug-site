@@ -45,6 +45,21 @@ def organization_jsonld():
             "streetAddress": "пос. Дружелюбный, ул. Железнодорожная, 3",
         },
         "geo": {"@type": "GeoCoordinates", "latitude": 45.109667, "longitude": 39.144306},
+        "subOrganization": [
+            {
+                "@type": "LocalBusiness",
+                "name": "ХИМКОМ-ЮГ — Республика Дагестан",
+                "url": site + "/",
+                "telephone": "+7-929-788-77-77",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "RU",
+                    "addressRegion": "Республика Дагестан",
+                    "addressLocality": "Хасавюрт",
+                    "streetAddress": "ул. Новогрозненская, 56",
+                },
+            }
+        ],
         "areaServed": [
             "Краснодарский край",
             "Ростовская область",

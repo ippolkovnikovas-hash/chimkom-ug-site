@@ -3,7 +3,7 @@ from flask_mail import Message
 
 from app.main import bp
 from app import mail
-from app.main.people import PEOPLE, TEAM, TEAM_PEOPLE, REPUBLICS, format_phone
+from app.main.people import PEOPLE, TEAM, TEAM_PEOPLE, REPUBLICS, OFFICE_ADDRESSES, format_phone
 
 # Регионы формы «Контакты»: код -> (название, ключ конфига с адресом получателя)
 CONTACT_REGIONS = {
@@ -69,6 +69,7 @@ def contact():
         regions=CONTACT_REGIONS,
         people=PEOPLE,
         republics=REPUBLICS,
+        office_addresses=OFFICE_ADDRESSES,
         team_people=TEAM_PEOPLE,
     )
 
