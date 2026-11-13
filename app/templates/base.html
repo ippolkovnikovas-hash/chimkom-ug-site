@@ -350,8 +350,11 @@
       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
       ym({{ metrika_id }}, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true});
+      window.YM_COUNTER_ID = "{{ metrika_id }}";
+      {% if metrika_goal %}window.YM_GOAL_ON_LOAD = "{{ metrika_goal }}";{% endif %}
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/{{ metrika_id }}" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+    <script src="{{ url_for('static', filename='js/metrika-goals.js') }}"></script>
     {% endif %}
   </body>
 </html>

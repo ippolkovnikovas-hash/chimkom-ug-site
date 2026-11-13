@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, current_app
+from flask import render_template, request, redirect, url_for, flash, session, current_app
 from flask_mail import Message
 
 from app.main import bp
@@ -58,6 +58,7 @@ def contact():
 
         try:
             mail.send(msg)
+            session["metrika_goal"] = "contact_form"
             flash("Сообщение отправлено. Мы свяжемся с вами в ближайшее время.", "success")
         except Exception as e:
             flash(f"Ошибка при отправке: {e}", "error")
@@ -96,6 +97,7 @@ def feedback():
 
     try:
         mail.send(msg)
+        session["metrika_goal"] = "footer_form"
         flash("Сообщение отправлено.", "success")
     except Exception as e:
         flash(f"Ошибка при отправке: {e}", "error")
@@ -122,6 +124,7 @@ def callback():
 
     try:
         mail.send(msg)
+        session["metrika_goal"] = "callback_form"
         flash("Спасибо! Мы перезвоним вам в ближайшее время.", "success")
     except Exception as e:
         flash(f"Ошибка при отправке: {e}", "error")
