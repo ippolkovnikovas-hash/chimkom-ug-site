@@ -1,6 +1,12 @@
 # Редирект с http на https создан автоматически при заказе бесплатного ssl-сертификата
+# 13.11.2026: код 301 вместо 302 и 301 с www на основной адрес без www (один переход, а не цепочка)
 RewriteEngine On
-RewriteCond %{SERVER_PORT} !^443$
-RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
-# Конец редиректа
 
+# www.himkom-ug.ru -> https://himkom-ug.ru (и с http, и с https)
+RewriteCond %{HTTP_HOST} ^www\.([^:]+) [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# http -> https
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+# Конец редиректа
