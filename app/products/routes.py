@@ -1,7 +1,7 @@
 from flask import abort, render_template
 
 from app.products import bp
-from app.products.data import CATEGORIES, PRODUCTS, PRODUCTS_BY_SLUG
+from app.products.data import CATEGORIES, CERTIFICATE, PRODUCTS, PRODUCTS_BY_SLUG
 from app.main.seo import product_jsonld
 
 
@@ -24,5 +24,6 @@ def detail(slug):
         "products/detail.html",
         product=product,
         related=related,
+        certificate=CERTIFICATE,
         jsonld=product_jsonld(product),
     )

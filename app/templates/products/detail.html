@@ -112,6 +112,14 @@
       </table>
       {% endif %}
 
+      <h2 class="spec-title">Сертификат соответствия</h2>
+      <p>Добавка «{{ product.name }}» входит в серийный выпуск, на который выдан добровольный сертификат соответствия.</p>
+      <table class="spec-table">
+        {% for name, value in certificate %}
+        <tr><th scope="row">{{ name }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
+      </table>
+
       <p>
         <a class="sheet-link" href="{{ url_for('static', filename=product.image) }}" target="_blank" rel="noopener" onclick="return openSheet(event, this)"><i class="fa fa-file-image-o"></i> Открыть технический лист (JPG)</a>
       </p>
