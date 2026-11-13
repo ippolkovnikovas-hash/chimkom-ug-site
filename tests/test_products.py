@@ -81,6 +81,13 @@ class ProductPagesTest(unittest.TestCase):
             self.assertTrue(os.path.isfile(os.path.join(STATIC, product["image"])), product["image"])
             self.assertIn(f'href="/static/{product["image"]}"', self.pages[product["slug"]])
 
+    def test_sheet_lightbox_above_header(self):
+        # лайтбокс листа обязан открываться поверх шапки (sub-header z-index 9999999, header 99999)
+        for slug, html in self.pages.items():
+            match = re.search(r"\.lightbox\s*\{[^}]*?z-index:\s*(\d+)", html, re.S)
+            self.assertIsNotNone(match, slug)
+            self.assertGreater(int(match.group(1)), 9999999, slug)
+
     def test_jsonld_product_and_breadcrumbs(self):
         for product in PRODUCTS:
             blocks = _jsonld_blocks(self.pages[product["slug"]])
