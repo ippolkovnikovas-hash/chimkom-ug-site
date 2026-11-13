@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Страница не найдена — ХИМКОМ-ЮГ{% endblock %}
+{% block meta_description %}Такой страницы на сайте ХИМКОМ-ЮГ нет. Перейдите в каталог добавок для бетона или на главную.{% endblock %}
+
+{% block content %}
+    <div class="page-heading header-text heading-catalog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Страница не найдена</h1>
+            <span>Ошибка 404</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="padding: 2rem 0 4rem; line-height: 1.6;">
+      <p>Возможно, адрес набран с ошибкой или страница была перенесена. Вот куда можно перейти:</p>
+      <ul style="list-style: disc; padding-left: 1.3rem;">
+        <li><a href="{{ url_for('main.index') }}">Главная</a></li>
+        <li><a href="{{ url_for('products.list') }}">Каталог добавок для бетона</a></li>
+        <li><a href="{{ url_for('main.about') }}">О компании</a></li>
+        <li><a href="{{ url_for('main.contact') }}">Контакты</a> — позвоните, подскажем: +7-952-868-45-67</li>
+      </ul>
+    </div>
+{% endblock %}
